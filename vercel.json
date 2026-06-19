@@ -1,6 +1,7 @@
 {
   "version": 2,
   "framework": null,
+  "outputDirectory": ".",
   "routes": [
     { "src": "/(index|mission|how-it-works|curriculum|partners|faq)", "dest": "/$1.html" },
     { "src": "/(.*)", "dest": "/$1" }
