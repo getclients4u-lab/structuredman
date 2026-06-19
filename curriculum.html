@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Curriculum — StructuredMan</title>
+  <meta name="description" content="Explore StructuredMan's full curriculum: legal navigation, financial rebuilding, emotional resilience, fatherhood, lifestyle reset, and dating after divorce." />
+  <link rel="canonical" href="https://www.structuredman.com/curriculum.html" />
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .curriculum-intro { padding: 72px 0; text-align: center; max-width: 680px; margin: 0 auto; }
+    .curriculum-intro h2 { margin-bottom: 16px; }
+    .curriculum-intro p { color: var(--text-muted); font-size: 1.05rem; line-height: 1.75; }
+
+    /* FILTER TABS */
+    .filter-bar { display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; margin-bottom: 56px; }
+    .filter-btn {
+      padding: 9px 20px; border-radius: 100px;
+      font-size: 13px; font-weight: 600; cursor: pointer;
+      border: 1.5px solid var(--border);
+      background: var(--white); color: var(--text-muted);
+      transition: all 0.15s;
+    }
+    .filter-btn:hover, .filter-btn.active {
+      background: var(--navy); color: var(--white); border-color: var(--navy);
+    }
+
+    /* MODULE GRID */
+    .module-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 28px; padding-bottom: 80px; }
+    .module-card {
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      transition: box-shadow 0.2s, transform 0.2s, border-color 0.2s;
+    }
+    .module-card:hover { box-shadow: var(--shadow-md); transform: translateY(-4px); border-color: var(--steel-light); }
+    .module-card-header {
+      padding: 28px 28px 0;
+      display: flex; align-items: flex-start; gap: 14px;
+    }
+    .module-emoji-wrap {
+      width: 52px; height: 52px; border-radius: var(--radius-md);
+      background: var(--cream); display: flex; align-items: center; justify-content: center;
+      font-size: 26px; flex-shrink: 0;
+    }
+    .module-card-meta { flex: 1; }
+    .module-phase-tag {
+      font-size: 10px; font-weight: 700; letter-spacing: 0.1em;
+      text-transform: uppercase; color: var(--amber); margin-bottom: 4px;
+    }
+    .module-card-meta h3 { font-size: 1.1rem; }
+    .module-card-body { padding: 16px 28px 28px; }
+    .module-card-body p { font-size: 0.92rem; color: var(--text-muted); line-height: 1.65; margin-bottom: 16px; }
+    .module-lessons { display: flex; flex-direction: column; gap: 7px; }
+    .module-lesson {
+      display: flex; align-items: flex-start; gap: 10px;
+      font-size: 0.87rem; color: var(--text-main); line-height: 1.45;
+    }
+    .module-lesson::before { content: '→'; color: var(--amber); font-size: 11px; flex-shrink: 0; margin-top: 2px; }
+    .module-card-footer {
+      border-top: 1px solid var(--border);
+      padding: 14px 28px;
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    .module-level {
+      font-size: 11px; font-weight: 700; padding: 4px 12px; border-radius: 100px;
+    }
+    .module-level--foundation { background: rgba(45,106,159,0.1); color: var(--steel); }
+    .module-level--strategy { background: rgba(201,134,42,0.1); color: var(--amber); }
+    .module-level--rebuild { background: rgba(13,27,42,0.08); color: var(--text-muted); }
+
+    /* TOOLS SECTION */
+    .tools-section { background: var(--navy); padding: 80px 0; }
+    .tools-header { text-align: center; max-width: 580px; margin: 0 auto 56px; }
+    .tools-header h2 { color: var(--cream); margin-bottom: 14px; }
+    .tools-header p { color: rgba(245,240,232,0.6); }
+    .tools-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 20px; }
+    .tool-card {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: var(--radius-lg);
+      padding: 28px 24px;
+      text-align: center;
+      transition: background 0.2s, border-color 0.2s, transform 0.2s;
+    }
+    .tool-card:hover { background: rgba(255,255,255,0.07); border-color: rgba(201,134,42,0.3); transform: translateY(-4px); }
+    .tool-icon { font-size: 32px; margin-bottom: 14px; }
+    .tool-card h4 { color: var(--white); font-size: 1rem; margin-bottom: 8px; }
+    .tool-card p { font-size: 0.87rem; color: rgba(245,240,232,0.55); line-height: 1.6; }
+
+    @media(max-width:960px){ .module-grid{grid-template-columns:1fr 1fr;} .tools-grid{grid-template-columns:1fr 1fr;} }
+    @media(max-width:640px){ .module-grid{grid-template-columns:1fr;} .tools-grid{grid-template-columns:1fr 1fr;} }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="container nav-inner">
+      <a href="index.html" class="nav-logo">Structured<span>Man</span></a>
+      <div class="nav-links">
+        <a href="mission.html">Our Mission</a>
+        <a href="how-it-works.html">How It Works</a>
+        <a href="curriculum.html">Curriculum</a>
+        <a href="partners.html">Partners</a>
+        <a href="faq.html">FAQ</a>
+        <a href="faq.html#join" class="btn btn--amber nav-cta">Get Started</a>
+      </div>
+      <button class="nav-hamburger" aria-label="Open menu"><span></span><span></span><span></span></button>
+    </div>
+  </nav>
+  <div class="mobile-menu">
+    <button class="mobile-close" aria-label="Close menu">✕</button>
+    <a href="index.html">Home</a>
+    <a href="mission.html">Our Mission</a>
+    <a href="how-it-works.html">How It Works</a>
+    <a href="curriculum.html">Curriculum</a>
+    <a href="partners.html">Partners</a>
+    <a href="faq.html">FAQ</a>
+    <a href="faq.html#join" class="btn btn--amber" style="margin-top:12px;">Get Started</a>
+  </div>
+
+  <section class="page-hero">
+    <div class="page-hero-grid"></div>
+    <div class="container page-hero-content">
+      <span class="eyebrow eyebrow--light">What You'll Learn</span>
+      <h1>A Curriculum Built Around<br>the Real Challenges Men Face</h1>
+      <p>Every module is built from real questions, real pain points, and real mistakes men make during and after divorce — so you can avoid them and move forward faster.</p>
+    </div>
+  </section>
+
+  <section class="section section--cream">
+    <div class="container">
+      <div class="curriculum-intro fade-up">
+        <span class="eyebrow">The Full Curriculum</span>
+        <h2>Six Core Areas. Hundreds of Practical Insights.</h2>
+        <p>StructuredMan's curriculum covers every dimension of life that divorce affects. Each module is designed to be applied immediately — not just read and forgotten.</p>
+      </div>
+
+      <div class="filter-bar">
+        <button class="filter-btn active">All Modules</button>
+        <button class="filter-btn">Legal</button>
+        <button class="filter-btn">Financial</button>
+        <button class="filter-btn">Emotional</button>
+        <button class="filter-btn">Fatherhood</button>
+        <button class="filter-btn">Lifestyle</button>
+        <button class="filter-btn">Relationships</button>
+      </div>
+
+      <div class="module-grid">
+        <!-- MODULE 1 -->
+        <div class="module-card fade-up fade-up-d1">
+          <div class="module-card-header">
+            <div class="module-emoji-wrap">⚖️</div>
+            <div class="module-card-meta">
+              <div class="module-phase-tag">Phase 1 & 2 · Legal</div>
+              <h3>Legal Navigation</h3>
+            </div>
+          </div>
+          <div class="module-card-body">
+            <p>Understand the divorce process without a law degree. Know your rights, avoid common traps, and make decisions from knowledge — not fear.</p>
+            <div class="module-lessons">
+              <div class="module-lesson">Understanding divorce proceedings from start to finish</div>
+              <div class="module-lesson">Protecting your assets during the process</div>
+              <div class="module-lesson">Custody frameworks and parenting plan structures</div>
+              <div class="module-lesson">When to negotiate vs. when to litigate</div>
+              <div class="module-lesson">Working effectively with your attorney</div>
+            </div>
+          </div>
+          <div class="module-card-footer">
+            <span class="module-level module-level--foundation">Foundation</span>
+          </div>
+        </div>
+
+        <!-- MODULE 2 -->
+        <div class="module-card fade-up fade-up-d2">
+          <div class="module-card-header">
+            <div class="module-emoji-wrap">💰</div>
+            <div class="module-card-meta">
+              <div class="module-phase-tag">Phase 2 & 3 · Financial</div>
+              <h3>Financial Rebuilding</h3>
+            </div>
+          </div>
+          <div class="module-card-body">
+            <p>From splitting assets to rebuilding your net worth — practical financial guidance for men starting over with a new economic reality.</p>
+            <div class="module-lessons">
+              <div class="module-lesson">Asset division strategy and negotiation</div>
+              <div class="module-lesson">Post-divorce budgeting and cash flow</div>
+              <div class="module-lesson">Credit and debt management after separation</div>
+              <div class="module-lesson">Rebuilding long-term wealth from scratch</div>
+              <div class="module-lesson">Retirement account division and planning</div>
+            </div>
+          </div>
+          <div class="module-card-footer">
+            <span class="module-level module-level--strategy">Strategy</span>
+          </div>
+        </div>
+
+        <!-- MODULE 3 -->
+        <div class="module-card fade-up fade-up-d3">
+          <div class="module-card-header">
+            <div class="module-emoji-wrap">🧠</div>
+            <div class="module-card-meta">
+              <div class="module-phase-tag">All Phases · Emotional</div>
+              <h3>Emotional Resilience</h3>
+            </div>
+          </div>
+          <div class="module-card-body">
+            <p>Men don't often talk about the emotional weight of divorce. We do. Learn to process grief, manage anger, and build the emotional strength to move forward.</p>
+            <div class="module-lessons">
+              <div class="module-lesson">Processing grief and loss on your own terms</div>
+              <div class="module-lesson">Managing anger in high-conflict situations</div>
+              <div class="module-lesson">Mindset resets that actually work for men</div>
+              <div class="module-lesson">Building a real support network</div>
+              <div class="module-lesson">Recognizing and addressing depression early</div>
+            </div>
+          </div>
+          <div class="module-card-footer">
+            <span class="module-level module-level--foundation">Foundation</span>
+          </div>
+        </div>
+
+        <!-- MODULE 4 -->
+        <div class="module-card fade-up fade-up-d1">
+          <div class="module-card-header">
+            <div class="module-emoji-wrap">👨‍👧‍👦</div>
+            <div class="module-card-meta">
+              <div class="module-phase-tag">Phase 2 & 3 · Fatherhood</div>
+              <h3>Fatherhood After Divorce</h3>
+            </div>
+          </div>
+          <div class="module-card-body">
+            <p>Being a great dad doesn't require living under the same roof. Build your relationship with your children through transition and beyond.</p>
+            <div class="module-lessons">
+              <div class="module-lesson">Parenting plans that work in the real world</div>
+              <div class="module-lesson">Age-appropriate ways to talk to kids about divorce</div>
+              <div class="module-lesson">Staying present and engaged across two homes</div>
+              <div class="module-lesson">Co-parenting communication templates</div>
+              <div class="module-lesson">Handling parental alienation situations</div>
+            </div>
+          </div>
+          <div class="module-card-footer">
+            <span class="module-level module-level--strategy">Strategy</span>
+          </div>
+        </div>
+
+        <!-- MODULE 5 -->
+        <div class="module-card fade-up fade-up-d2">
+          <div class="module-card-header">
+            <div class="module-emoji-wrap">🏠</div>
+            <div class="module-card-meta">
+              <div class="module-phase-tag">Phase 3 · Lifestyle</div>
+              <h3>Lifestyle &amp; Identity Reset</h3>
+            </div>
+          </div>
+          <div class="module-card-body">
+            <p>Your routines, home, and sense of self need rebuilding. We give you the frameworks to design a life that actually fits who you are now.</p>
+            <div class="module-lessons">
+              <div class="module-lesson">Building new daily structures that stick</div>
+              <div class="module-lesson">Housing decisions and practical logistics</div>
+              <div class="module-lesson">Physical health and exercise as a foundation</div>
+              <div class="module-lesson">Social life, friendships, and your network</div>
+              <div class="module-lesson">Rediscovering identity outside of marriage</div>
+            </div>
+          </div>
+          <div class="module-card-footer">
+            <span class="module-level module-level--rebuild">Rebuild</span>
+          </div>
+        </div>
+
+        <!-- MODULE 6 -->
+        <div class="module-card fade-up fade-up-d3">
+          <div class="module-card-header">
+            <div class="module-emoji-wrap">🌅</div>
+            <div class="module-card-meta">
+              <div class="module-phase-tag">Phase 4 · Relationships</div>
+              <h3>Dating &amp; Relationships</h3>
+            </div>
+          </div>
+          <div class="module-card-body">
+            <p>When you're ready — and only when you're ready — guidance on re-entering relationships with clarity, confidence, and healthy boundaries.</p>
+            <div class="module-lessons">
+              <div class="module-lesson">Knowing when you're actually ready to date</div>
+              <div class="module-lesson">Setting healthy boundaries from day one</div>
+              <div class="module-lesson">Rebuilding trust — in yourself first</div>
+              <div class="module-lesson">Dating as a father: what to consider</div>
+              <div class="module-lesson">Introducing a partner to your children</div>
+            </div>
+          </div>
+          <div class="module-card-footer">
+            <span class="module-level module-level--rebuild">Rebuild</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TOOLS SECTION -->
+  <section class="tools-section">
+    <div class="container">
+      <div class="tools-header fade-up">
+        <span class="eyebrow eyebrow--light">Beyond the Content</span>
+        <h2>Tools and Templates Included</h2>
+        <p>Every module comes with practical tools — not just information. You'll leave each section with something you can use immediately.</p>
+      </div>
+      <div class="tools-grid">
+        <div class="tool-card fade-up fade-up-d1">
+          <div class="tool-icon">📋</div>
+          <h4>Document Templates</h4>
+          <p>Parenting plans, financial trackers, co-parenting agreements, and more.</p>
+        </div>
+        <div class="tool-card fade-up fade-up-d2">
+          <div class="tool-icon">✅</div>
+          <h4>Decision Checklists</h4>
+          <p>Step-by-step checklists for every major decision in the divorce process.</p>
+        </div>
+        <div class="tool-card fade-up fade-up-d3">
+          <div class="tool-icon">💬</div>
+          <h4>Communication Scripts</h4>
+          <p>Word-for-word scripts for difficult conversations with ex-partners, attorneys, and kids.</p>
+        </div>
+        <div class="tool-card fade-up fade-up-d4">
+          <div class="tool-icon">📊</div>
+          <h4>Financial Worksheets</h4>
+          <p>Budget templates, asset division calculators, and post-divorce financial planners.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta-banner">
+    <div class="container">
+      <span class="eyebrow" style="color:rgba(255,255,255,0.65);text-align:center;display:block;margin-bottom:20px;">Ready to Get Started?</span>
+      <h2>Access the Full Curriculum Today.</h2>
+      <p>Every module, every tool, every template — available when you need it, at the pace that works for you.</p>
+      <div class="cta-actions">
+        <a href="faq.html#join" class="btn btn--white">Join StructuredMan</a>
+        <a href="how-it-works.html" class="btn btn--amber-outline">See How It Works</a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <div class="footer-inner">
+        <div>
+          <div class="footer-brand-name">Structured<span>Man</span></div>
+          <p class="footer-desc">Structured guidance, practical tools, and a community for men navigating divorce and rebuilding their lives with clarity and purpose.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Navigate</h4>
+          <ul>
+            <li><a href="mission.html">Our Mission</a></li>
+            <li><a href="how-it-works.html">How It Works</a></li>
+            <li><a href="curriculum.html">Curriculum</a></li>
+            <li><a href="partners.html">Partners</a></li>
+            <li><a href="faq.html">FAQ</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Topics</h4>
+          <ul>
+            <li><a href="curriculum.html">Legal Navigation</a></li>
+            <li><a href="curriculum.html">Financial Rebuilding</a></li>
+            <li><a href="curriculum.html">Fatherhood</a></li>
+            <li><a href="curriculum.html">Emotional Resilience</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Company</h4>
+          <ul>
+            <li><a href="mission.html">About Us</a></li>
+            <li><a href="partners.html">Partners</a></li>
+            <li><a href="faq.html">Contact</a></li>
+            <li><a href="#">Privacy Policy</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© 2026 StructuredMan. All rights reserved.</span>
+        <div class="footer-bottom-links"><a href="#">Terms</a><a href="#">Privacy</a><a href="#">Accessibility</a></div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="main.js"></script>
+  <script>
+    // Filter tabs (visual only — full filtering would need backend)
+    document.querySelectorAll('.filter-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+      });
+    });
+  </script>
+</body>
+</html>

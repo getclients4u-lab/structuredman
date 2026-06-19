@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>How It Works — StructuredMan</title>
+  <meta name="description" content="StructuredMan's four-phase framework guides men through divorce with clarity — from awareness to financial strategy, personal foundation, and growth." />
+  <link rel="canonical" href="https://www.structuredman.com/how-it-works.html" />
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    /* PHASE CARDS */
+    .phases-section { padding: 96px 0; }
+    .phases-section .section-header { text-align: center; max-width: 640px; margin: 0 auto 72px; }
+    .phases-section .section-header h2 { margin-bottom: 16px; }
+    .phases-section .section-header p { color: var(--text-muted); font-size: 1.05rem; }
+
+    .phase-block {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      align-items: start;
+      margin-bottom: 80px;
+      padding-bottom: 80px;
+      border-bottom: 1px solid var(--border);
+    }
+    .phase-block:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+    .phase-block.reverse { direction: rtl; }
+    .phase-block.reverse > * { direction: ltr; }
+
+    .phase-label {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 20px;
+    }
+    .phase-label-num {
+      width: 48px; height: 48px;
+      border-radius: 50%;
+      background: var(--amber);
+      color: var(--white);
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 1.2rem;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+    .phase-label-title { font-size: 11px; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: var(--amber); }
+
+    .phase-text h2 { font-size: clamp(1.6rem, 3vw, 2.2rem); margin-bottom: 16px; }
+    .phase-text p { color: var(--text-muted); line-height: 1.8; margin-bottom: 16px; }
+    .phase-text p strong { color: var(--text-main); }
+
+    .phase-deliverables { margin-top: 28px; }
+    .phase-deliverables h4 { font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 14px; font-family: var(--font-body); }
+    .phase-deliverables ul { display: flex; flex-direction: column; gap: 10px; }
+    .phase-deliverables li {
+      display: flex; align-items: flex-start; gap: 12px;
+      font-size: 0.93rem; color: var(--text-main); line-height: 1.5;
+    }
+    .phase-deliverables li::before {
+      content: '✓';
+      color: var(--amber);
+      font-weight: 700;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    .phase-visual {
+      background: var(--navy);
+      border-radius: var(--radius-lg);
+      padding: 40px 36px;
+      color: var(--cream);
+      position: relative;
+      overflow: hidden;
+    }
+    .phase-visual::after {
+      content: attr(data-num);
+      position: absolute;
+      bottom: -20px; right: 20px;
+      font-family: var(--font-display);
+      font-size: 9rem;
+      font-weight: 700;
+      color: rgba(201,134,42,0.07);
+      line-height: 1;
+    }
+    .phase-visual-icon { font-size: 40px; margin-bottom: 20px; }
+    .phase-visual h3 { color: var(--white); margin-bottom: 14px; font-size: 1.2rem; }
+    .phase-visual-outcome {
+      background: rgba(201,134,42,0.1);
+      border: 1px solid rgba(201,134,42,0.2);
+      border-radius: var(--radius-md);
+      padding: 16px 18px;
+      margin-top: 24px;
+    }
+    .phase-visual-outcome-label { font-size: 10px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--amber); margin-bottom: 6px; }
+    .phase-visual-outcome p { font-size: 0.9rem; color: rgba(245,240,232,0.75); line-height: 1.6; }
+    .phase-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 20px; }
+    .phase-tag {
+      font-size: 11px; font-weight: 600; padding: 5px 12px; border-radius: 100px;
+      background: rgba(45,106,159,0.2); color: #7BBFEA;
+    }
+
+    /* PROCESS STRIP */
+    .process-strip { background: var(--cream); padding: 72px 0; }
+    .process-strip h2 { text-align: center; margin-bottom: 48px; }
+    .process-flow { display: flex; align-items: flex-start; gap: 0; overflow-x: auto; }
+    .process-step { flex: 1; min-width: 160px; text-align: center; padding: 0 16px; position: relative; }
+    .process-step:not(:last-child)::after {
+      content: '→';
+      position: absolute;
+      right: -10px; top: 22px;
+      font-size: 20px;
+      color: var(--amber);
+    }
+    .process-step-circle {
+      width: 48px; height: 48px; border-radius: 50%;
+      background: var(--navy); color: var(--amber);
+      font-family: var(--font-display); font-weight: 700; font-size: 1.1rem;
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 12px;
+    }
+    .process-step-label { font-size: 13px; font-weight: 700; color: var(--text-main); }
+    .process-step-sub { font-size: 11px; color: var(--text-muted); margin-top: 4px; }
+
+    @media(max-width:960px){
+      .phase-block, .phase-block.reverse { grid-template-columns:1fr; direction:ltr; gap:36px; }
+      .phase-block { padding-bottom:60px; margin-bottom:60px; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="container nav-inner">
+      <a href="index.html" class="nav-logo">Structured<span>Man</span></a>
+      <div class="nav-links">
+        <a href="mission.html">Our Mission</a>
+        <a href="how-it-works.html">How It Works</a>
+        <a href="curriculum.html">Curriculum</a>
+        <a href="partners.html">Partners</a>
+        <a href="faq.html">FAQ</a>
+        <a href="faq.html#join" class="btn btn--amber nav-cta">Get Started</a>
+      </div>
+      <button class="nav-hamburger" aria-label="Open menu"><span></span><span></span><span></span></button>
+    </div>
+  </nav>
+  <div class="mobile-menu">
+    <button class="mobile-close" aria-label="Close menu">✕</button>
+    <a href="index.html">Home</a>
+    <a href="mission.html">Our Mission</a>
+    <a href="how-it-works.html">How It Works</a>
+    <a href="curriculum.html">Curriculum</a>
+    <a href="partners.html">Partners</a>
+    <a href="faq.html">FAQ</a>
+    <a href="faq.html#join" class="btn btn--amber" style="margin-top:12px;">Get Started</a>
+  </div>
+
+  <section class="page-hero">
+    <div class="page-hero-grid"></div>
+    <div class="container page-hero-content">
+      <span class="eyebrow eyebrow--light">The Framework</span>
+      <h1>Four Phases.<br>One Clear Direction.</h1>
+      <p>We've broken the journey after divorce into four focused phases — each designed to build the foundation for the next. No chaos. No guessing. Just a structured path forward.</p>
+    </div>
+  </section>
+
+  <!-- PROCESS FLOW -->
+  <section class="process-strip">
+    <div class="container">
+      <h2>Your Path Through StructuredMan</h2>
+      <div class="process-flow">
+        <div class="process-step">
+          <div class="process-step-circle">01</div>
+          <div class="process-step-label">Awareness</div>
+          <div class="process-step-sub">Find your footing</div>
+        </div>
+        <div class="process-step">
+          <div class="process-step-circle">02</div>
+          <div class="process-step-label">Optimize</div>
+          <div class="process-step-sub">Build your strategy</div>
+        </div>
+        <div class="process-step">
+          <div class="process-step-circle">03</div>
+          <div class="process-step-label">Strengthen</div>
+          <div class="process-step-sub">Build your foundation</div>
+        </div>
+        <div class="process-step">
+          <div class="process-step-circle">04</div>
+          <div class="process-step-label">Grow</div>
+          <div class="process-step-sub">Write the next chapter</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PHASE DETAILS -->
+  <section class="phases-section">
+    <div class="container">
+      <div class="section-header fade-up">
+        <span class="eyebrow">Each Phase, In Depth</span>
+        <h2>What You'll Do — and Why It Matters</h2>
+        <p>Every phase is built around real pain points men experience during and after divorce. Here's exactly what happens at each stage.</p>
+      </div>
+
+      <!-- PHASE 1 -->
+      <div class="phase-block fade-up">
+        <div class="phase-text">
+          <div class="phase-label">
+            <div class="phase-label-num">1</div>
+            <div class="phase-label-title">Phase One</div>
+          </div>
+          <h2>Build Awareness &amp; Find Your Footing</h2>
+          <p>Most men enter divorce with a fragmented understanding of what's actually happening — legally, financially, and emotionally. This phase is about establishing a clear, honest picture of where you stand so every decision you make is grounded in reality, not fear.</p>
+          <p>We help you <strong>identify your pain points</strong>, clarify what you actually need, map your customer journey as a divorced man, and build the foundation for everything that follows.</p>
+          <div class="phase-deliverables">
+            <h4>What This Phase Covers</h4>
+            <ul>
+              <li>Self-assessment tools to map your legal, financial, and emotional situation</li>
+              <li>Identifying your specific pain points and buying triggers</li>
+              <li>Building your personal "needs map" for the divorce journey</li>
+              <li>Understanding your options before making any major decisions</li>
+              <li>Setting up your initial action plan and timeline</li>
+            </ul>
+          </div>
+        </div>
+        <div class="phase-visual" data-num="01">
+          <div class="phase-visual-icon">🎯</div>
+          <h3>Clarity From Day One</h3>
+          <p style="color:rgba(245,240,232,0.65);font-size:0.93rem;line-height:1.7;">The most common mistake men make is acting before they have a clear picture of their situation. Phase 1 slows you down just enough to get oriented — so Phase 2 can move fast.</p>
+          <div class="phase-visual-outcome">
+            <div class="phase-visual-outcome-label">Expected Outcome</div>
+            <p>Higher awareness, a validated personal action plan, and the confidence to make informed decisions — not reactive ones.</p>
+          </div>
+          <div class="phase-tags">
+            <span class="phase-tag">Self-Assessment</span>
+            <span class="phase-tag">Needs Mapping</span>
+            <span class="phase-tag">Action Planning</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- PHASE 2 -->
+      <div class="phase-block reverse fade-up">
+        <div class="phase-text">
+          <div class="phase-label">
+            <div class="phase-label-num">2</div>
+            <div class="phase-label-title">Phase Two</div>
+          </div>
+          <h2>Optimize the Divorce Journey</h2>
+          <p>With a clear picture of your situation, it's time to build your strategy. This phase covers the end-to-end divorce process — from legal proceedings to parenting plans to financial negotiations — so you can move through it with intention rather than reaction.</p>
+          <p>We review your <strong>full journey through the process</strong>, help you optimize every decision point, and give you the frameworks to protect what matters most.</p>
+          <div class="phase-deliverables">
+            <h4>What This Phase Covers</h4>
+            <ul>
+              <li>Reviewing your full divorce journey and key decision points</li>
+              <li>Custody and parenting plan frameworks</li>
+              <li>Asset protection and negotiation strategy</li>
+              <li>Understanding when to negotiate vs. when to litigate</li>
+              <li>Communication frameworks for dealing with attorneys and mediators</li>
+            </ul>
+          </div>
+        </div>
+        <div class="phase-visual" data-num="02">
+          <div class="phase-visual-icon">🗺️</div>
+          <h3>Strategy Over Reaction</h3>
+          <p style="color:rgba(245,240,232,0.65);font-size:0.93rem;line-height:1.7;">The divorce process has leverage points most men don't know exist. This phase gives you a map of those points — and a strategy to use them in your favor.</p>
+          <div class="phase-visual-outcome">
+            <div class="phase-visual-outcome-label">Expected Outcome</div>
+            <p>Increased confidence in the legal and financial proceedings, better decisions, and improved outcomes for you and your children.</p>
+          </div>
+          <div class="phase-tags">
+            <span class="phase-tag">Legal Strategy</span>
+            <span class="phase-tag">Financial Negotiation</span>
+            <span class="phase-tag">Parenting Plans</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- PHASE 3 -->
+      <div class="phase-block fade-up">
+        <div class="phase-text">
+          <div class="phase-label">
+            <div class="phase-label-num">3</div>
+            <div class="phase-label-title">Phase Three</div>
+          </div>
+          <h2>Strengthen Your Foundation</h2>
+          <p>Once the immediate legal and financial decisions are behind you, the real work begins: building a new life. This phase is about creating the systems, habits, and infrastructure that hold your new reality together — financially, physically, and emotionally.</p>
+          <p>We give you the <strong>operational scaffolding</strong> for your post-divorce life — housing, budgeting, co-parenting logistics, personal health, and the data and metrics to track your own recovery.</p>
+          <div class="phase-deliverables">
+            <h4>What This Phase Covers</h4>
+            <ul>
+              <li>Post-divorce financial rebuild and budgeting</li>
+              <li>Housing, logistics, and practical life restructuring</li>
+              <li>Co-parenting systems and communication tools</li>
+              <li>Health, fitness, and daily routine rebuilding</li>
+              <li>Measuring your own progress with clear milestones</li>
+            </ul>
+          </div>
+        </div>
+        <div class="phase-visual" data-num="03">
+          <div class="phase-visual-icon">🏗️</div>
+          <h3>Systems That Hold</h3>
+          <p style="color:rgba(245,240,232,0.65);font-size:0.93rem;line-height:1.7;">A new life doesn't build itself. This phase is about engineering the structure — day by day, system by system — so that stability becomes the baseline, not the exception.</p>
+          <div class="phase-visual-outcome">
+            <div class="phase-visual-outcome-label">Expected Outcome</div>
+            <p>A scalable, data-driven personal operating platform — routines, finances, and relationships you can sustain and grow.</p>
+          </div>
+          <div class="phase-tags">
+            <span class="phase-tag">Lifestyle Design</span>
+            <span class="phase-tag">Financial Reset</span>
+            <span class="phase-tag">Co-Parenting Systems</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- PHASE 4 -->
+      <div class="phase-block reverse fade-up">
+        <div class="phase-text">
+          <div class="phase-label">
+            <div class="phase-label-num">4</div>
+            <div class="phase-label-title">Phase Four</div>
+          </div>
+          <h2>Create Your Growth Narrative</h2>
+          <p>The final phase is about more than surviving divorce — it's about building the story of who you're becoming. This is where we help you define your identity, build momentum in your personal and professional life, and step into the future with clarity and purpose.</p>
+          <p>We help you <strong>develop your forward-looking narrative</strong> — the goals, identity, and vision that will guide your next chapter — so that divorce becomes the turning point, not the endpoint.</p>
+          <div class="phase-deliverables">
+            <h4>What This Phase Covers</h4>
+            <ul>
+              <li>Personal narrative and identity reframing</li>
+              <li>Goal setting for the next 12, 24, and 60 months</li>
+              <li>Career and financial growth planning</li>
+              <li>Relationship readiness and dating after divorce</li>
+              <li>Long-term vision and the man you're choosing to become</li>
+            </ul>
+          </div>
+        </div>
+        <div class="phase-visual" data-num="04">
+          <div class="phase-visual-icon">🚀</div>
+          <h3>The Next Chapter Starts Here</h3>
+          <p style="color:rgba(245,240,232,0.65);font-size:0.93rem;line-height:1.7;">Divorce is a transition, not a destination. Phase 4 is where men stop asking "how do I get through this?" and start asking "who do I want to be?" — and get a clear answer.</p>
+          <div class="phase-visual-outcome">
+            <div class="phase-visual-outcome-label">Expected Outcome</div>
+            <p>A compelling personal growth narrative and a clear path forward — with the mindset, momentum, and tools to actually get there.</p>
+          </div>
+          <div class="phase-tags">
+            <span class="phase-tag">Identity Rebuilding</span>
+            <span class="phase-tag">Goal Setting</span>
+            <span class="phase-tag">Forward Momentum</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-banner">
+    <div class="container">
+      <span class="eyebrow" style="color:rgba(255,255,255,0.65);text-align:center;display:block;margin-bottom:20px;">Your Next Step</span>
+      <h2>Ready to Start Phase One?</h2>
+      <p>Every journey through StructuredMan begins with a clear picture of where you are. Take the first step today.</p>
+      <div class="cta-actions">
+        <a href="curriculum.html" class="btn btn--white">Explore the Full Curriculum</a>
+        <a href="partners.html" class="btn btn--amber-outline">Meet Our Partners</a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <div class="footer-inner">
+        <div>
+          <div class="footer-brand-name">Structured<span>Man</span></div>
+          <p class="footer-desc">Structured guidance, practical tools, and a community for men navigating divorce and rebuilding their lives with clarity and purpose.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Navigate</h4>
+          <ul>
+            <li><a href="mission.html">Our Mission</a></li>
+            <li><a href="how-it-works.html">How It Works</a></li>
+            <li><a href="curriculum.html">Curriculum</a></li>
+            <li><a href="partners.html">Partners</a></li>
+            <li><a href="faq.html">FAQ</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Topics</h4>
+          <ul>
+            <li><a href="curriculum.html">Legal Navigation</a></li>
+            <li><a href="curriculum.html">Financial Rebuilding</a></li>
+            <li><a href="curriculum.html">Fatherhood</a></li>
+            <li><a href="curriculum.html">Emotional Resilience</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Company</h4>
+          <ul>
+            <li><a href="mission.html">About Us</a></li>
+            <li><a href="partners.html">Partners</a></li>
+            <li><a href="faq.html">Contact</a></li>
+            <li><a href="#">Privacy Policy</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© 2026 StructuredMan. All rights reserved.</span>
+        <div class="footer-bottom-links"><a href="#">Terms</a><a href="#">Privacy</a><a href="#">Accessibility</a></div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="main.js"></script>
+</body>
+</html>

@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FAQ — StructuredMan</title>
+  <meta name="description" content="Answers to the most common questions men ask about StructuredMan — what it is, who it's for, how it works, and how to get started." />
+  <link rel="canonical" href="https://www.structuredman.com/faq.html" />
+  <link rel="stylesheet" href="style.css" />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {"@type":"Question","name":"What is StructuredMan?","acceptedAnswer":{"@type":"Answer","text":"StructuredMan is a structured support platform built specifically for men navigating divorce. We offer a clear educational curriculum, practical tools and templates, and a community of men moving forward together."}},
+      {"@type":"Question","name":"Am I too early or too late to join?","acceptedAnswer":{"@type":"Answer","text":"Neither. StructuredMan supports men at every stage — whether you're just considering separation, deep in proceedings, or already divorced and trying to rebuild."}},
+      {"@type":"Question","name":"Is this a replacement for a lawyer or therapist?","acceptedAnswer":{"@type":"Answer","text":"No. StructuredMan fills the gap between those services — providing structured frameworks, templates, and community support that help you ask better questions and stay organized."}},
+      {"@type":"Question","name":"What makes this different from just searching online?","acceptedAnswer":{"@type":"Answer","text":"Search results give you fragments. StructuredMan gives you a sequence — a clear, ordered curriculum built around the real challenges men face, with tools and community to help you apply what you learn."}},
+      {"@type":"Question","name":"Is there a community component?","acceptedAnswer":{"@type":"Answer","text":"Yes. Community is core to what we do. You'll have access to other men going through the same process — a place to ask questions, share progress, and find accountability without judgment."}},
+      {"@type":"Question","name":"What if I'm dealing with a high-conflict situation?","acceptedAnswer":{"@type":"Answer","text":"We have specific modules for high-conflict divorces, parental alienation, and difficult co-parenting dynamics. You won't be left to navigate the hardest scenarios alone."}}
+    ]
+  }
+  </script>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    /* FAQ ACCORDION */
+    .faq-section { padding: 80px 0; }
+    .faq-section-header { text-align: center; max-width: 580px; margin: 0 auto 60px; }
+    .faq-section-header h2 { margin-bottom: 14px; }
+    .faq-section-header p { color: var(--text-muted); }
+
+    .faq-categories { display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; margin-bottom: 52px; }
+    .faq-cat-btn {
+      padding: 8px 20px; border-radius: 100px;
+      font-size: 13px; font-weight: 600; cursor: pointer;
+      border: 1.5px solid var(--border);
+      background: var(--white); color: var(--text-muted);
+      transition: all 0.15s;
+    }
+    .faq-cat-btn:hover, .faq-cat-btn.active {
+      background: var(--navy); color: var(--white); border-color: var(--navy);
+    }
+
+    .faq-list { max-width: 800px; margin: 0 auto; display: flex; flex-direction: column; gap: 0; }
+    .faq-item {
+      border-bottom: 1px solid var(--border);
+    }
+    .faq-item:first-child { border-top: 1px solid var(--border); }
+    .faq-question {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 22px 0; cursor: pointer; gap: 20px;
+      user-select: none;
+    }
+    .faq-question h3 {
+      font-family: var(--font-display); font-size: 1.05rem;
+      font-weight: 700; color: var(--text-main); flex: 1;
+    }
+    .faq-toggle {
+      width: 32px; height: 32px; border-radius: 50%;
+      background: var(--cream); border: none; cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 18px; color: var(--amber); flex-shrink: 0;
+      transition: background 0.15s, transform 0.25s;
+      font-weight: 700;
+    }
+    .faq-item.open .faq-toggle { background: var(--amber); color: var(--white); transform: rotate(45deg); }
+    .faq-answer {
+      max-height: 0; overflow: hidden;
+      transition: max-height 0.35s ease, padding 0.25s ease;
+      padding-bottom: 0;
+    }
+    .faq-item.open .faq-answer { max-height: 400px; padding-bottom: 22px; }
+    .faq-answer p { font-size: 0.95rem; color: var(--text-muted); line-height: 1.8; }
+
+    /* JOIN SECTION */
+    .join-section { background: var(--navy); padding: 96px 0; }
+    .join-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 72px; align-items: center; }
+    .join-text h2 { color: var(--white); margin-bottom: 18px; }
+    .join-text p { color: rgba(245,240,232,0.68); line-height: 1.8; margin-bottom: 20px; }
+    .join-bullets { display: flex; flex-direction: column; gap: 12px; margin-top: 28px; }
+    .join-bullet {
+      display: flex; align-items: center; gap: 12px;
+      font-size: 14px; color: rgba(245,240,232,0.8);
+    }
+    .join-bullet-dot {
+      width: 8px; height: 8px; border-radius: 50%;
+      background: var(--amber); flex-shrink: 0;
+    }
+    .join-form {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: var(--radius-lg);
+      padding: 40px 36px;
+    }
+    .join-form h3 { color: var(--white); font-size: 1.3rem; margin-bottom: 8px; }
+    .join-form-sub { color: rgba(245,240,232,0.55); font-size: 0.9rem; margin-bottom: 28px; }
+    .join-field { margin-bottom: 16px; }
+    .join-field label {
+      display: block; font-size: 11px; font-weight: 700;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      color: rgba(245,240,232,0.5); margin-bottom: 7px;
+    }
+    .join-field input, .join-field select {
+      width: 100%; padding: 12px 14px;
+      border: 1.5px solid rgba(255,255,255,0.12);
+      border-radius: var(--radius-sm);
+      background: rgba(255,255,255,0.06);
+      color: var(--white); font-size: 14px; font-family: var(--font-body);
+      transition: border-color 0.15s;
+    }
+    .join-field input::placeholder { color: rgba(245,240,232,0.3); }
+    .join-field input:focus, .join-field select:focus {
+      outline: none; border-color: var(--amber);
+    }
+    .join-field select option { background: var(--navy); }
+    .join-submit {
+      width: 100%; margin-top: 8px;
+      justify-content: center;
+      font-size: 15px; padding: 15px 28px;
+    }
+    .join-disclaimer { font-size: 11px; color: rgba(245,240,232,0.35); text-align: center; margin-top: 14px; line-height: 1.6; }
+
+    /* CONTACT STRIP */
+    .contact-strip { background: var(--cream); padding: 72px 0; }
+    .contact-strip-inner { display: grid; grid-template-columns: repeat(3,1fr); gap: 28px; }
+    .contact-card {
+      background: var(--white); border-radius: var(--radius-lg);
+      padding: 32px 28px; text-align: center;
+      box-shadow: var(--shadow-sm);
+    }
+    .contact-icon { font-size: 32px; margin-bottom: 14px; }
+    .contact-card h4 { margin-bottom: 8px; }
+    .contact-card p { font-size: 0.9rem; color: var(--text-muted); line-height: 1.6; }
+    .contact-card a { color: var(--steel); font-weight: 600; }
+
+    @media(max-width:960px){
+      .join-inner{ grid-template-columns:1fr; gap:48px; }
+      .contact-strip-inner{ grid-template-columns:1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="container nav-inner">
+      <a href="index.html" class="nav-logo">Structured<span>Man</span></a>
+      <div class="nav-links">
+        <a href="mission.html">Our Mission</a>
+        <a href="how-it-works.html">How It Works</a>
+        <a href="curriculum.html">Curriculum</a>
+        <a href="partners.html">Partners</a>
+        <a href="faq.html">FAQ</a>
+        <a href="#join" class="btn btn--amber nav-cta">Get Started</a>
+      </div>
+      <button class="nav-hamburger" aria-label="Open menu"><span></span><span></span><span></span></button>
+    </div>
+  </nav>
+  <div class="mobile-menu">
+    <button class="mobile-close" aria-label="Close menu">✕</button>
+    <a href="index.html">Home</a>
+    <a href="mission.html">Our Mission</a>
+    <a href="how-it-works.html">How It Works</a>
+    <a href="curriculum.html">Curriculum</a>
+    <a href="partners.html">Partners</a>
+    <a href="faq.html">FAQ</a>
+    <a href="#join" class="btn btn--amber" style="margin-top:12px;">Get Started</a>
+  </div>
+
+  <section class="page-hero">
+    <div class="page-hero-grid"></div>
+    <div class="container page-hero-content">
+      <span class="eyebrow eyebrow--light">Got Questions?</span>
+      <h1>Answers You<br>Actually Need</h1>
+      <p>Real questions from men before joining StructuredMan — answered honestly. If yours isn't here, reach out directly below.</p>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="faq-section">
+    <div class="container">
+      <div class="faq-section-header fade-up">
+        <span class="eyebrow">Frequently Asked Questions</span>
+        <h2>Everything You Want to Know</h2>
+        <p>We've organized the most common questions by topic. Click any question to expand the answer.</p>
+      </div>
+
+      <div class="faq-categories">
+        <button class="faq-cat-btn active">All Questions</button>
+        <button class="faq-cat-btn">About the Platform</button>
+        <button class="faq-cat-btn">The Curriculum</button>
+        <button class="faq-cat-btn">Community</button>
+        <button class="faq-cat-btn">Getting Started</button>
+      </div>
+
+      <div class="faq-list fade-up">
+
+        <div class="faq-item">
+          <div class="faq-question">
+            <h3>What is StructuredMan?</h3>
+            <button class="faq-toggle">+</button>
+          </div>
+          <div class="faq-answer">
+            <p>StructuredMan is a structured support platform built specifically for men navigating divorce. We offer a clear four-phase educational curriculum, practical tools and templates for every stage of the process, and a community of men moving forward — together. Think of it as the roadmap that no one gives men when their marriage ends.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question">
+            <h3>Am I too early or too late to join?</h3>
+            <button class="faq-toggle">+</button>
+          </div>
+          <div class="faq-answer">
+            <p>Neither. StructuredMan supports men at every stage of the divorce journey — whether you're just considering separation, in the middle of legal proceedings, or already divorced and trying to rebuild your life. Every phase of our curriculum has something relevant for where you are right now. The earlier you start, the better your decisions tend to be — but it's never too late to get structured.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question">
+            <h3>Is this a replacement for a lawyer or therapist?</h3>
+            <button class="faq-toggle">+</button>
+          </div>
+          <div class="faq-answer">
+            <p>No — and we'll tell you clearly when you need one. StructuredMan fills the gap between legal and therapeutic services. We give you frameworks, templates, and community support that help you ask better questions, stay organized, and make more informed decisions. We complement your attorney and therapist — we don't replace them. In fact, many men report that StructuredMan made their work with professionals far more effective and less expensive.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question">
+            <h3>What makes this different from just searching online?</h3>
+            <button class="faq-toggle">+</button>
+          </div>
+          <div class="faq-answer">
+            <p>Search results give you fragments — disconnected articles, Reddit threads, and legal FAQ pages that don't know your situation. StructuredMan gives you a sequence: a clear, ordered curriculum built around the actual challenges men face, delivered in a structured order that mirrors the real-world journey. Plus templates you can immediately use, and a community of men who've been where you are.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question">
+            <h3>Is there a community component?</h3>
+            <button class="faq-toggle">+</button>
+          </div>
+          <div class="faq-answer">
+            <p>Yes — and community is one of our most important features. Isolation is one of the most damaging aspects of divorce for men. StructuredMan gives you access to a community of men going through the same process — a space to ask questions, share progress, find accountability, and get real answers from people who understand what you're dealing with, without judgment.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question">
+            <h3>What if I'm dealing with a high-conflict divorce?</h3>
+            <button class="faq-toggle">+</button>
+          </div>
+          <div class="faq-answer">
+            <p>We have specific modules and resources designed for high-conflict situations — including parental alienation, hostile co-parenting dynamics, and adversarial legal proceedings. These scenarios are more common than people think, and you won't be left to navigate them alone. Our legal partner Marcus Reed built much of this content from his direct experience representing men in exactly these situations.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question">
+            <h3>Does StructuredMan help with co-parenting specifically?</h3>
+            <button class="faq-toggle">+</button>
+          </div>
+          <div class="faq-answer">
+            <p>Absolutely. Co-parenting is one of the most challenging long-term dimensions of divorce — and one of the most important to get right for your kids. We have a dedicated Fatherhood module that covers parenting plans, age-appropriate communication with children, co-parenting communication frameworks, and how to stay present and engaged when you're parenting across two homes.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question">
+            <h3>How long does the curriculum take to complete?</h3>
+            <button class="faq-toggle">+</button>
+          </div>
+          <div class="faq-answer">
+            <p>StructuredMan is designed to be self-paced. The four phases are structured sequentially, but you move through them at the pace your situation demands. Some men focus intensively during the active divorce period and return to later phases as their situation evolves. There's no deadline — your access is ongoing, and different modules become relevant at different points in the journey.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question">
+            <h3>What kind of tools and templates are included?</h3>
+            <button class="faq-toggle">+</button>
+          </div>
+          <div class="faq-answer">
+            <p>Every module comes with practical tools — not just information. These include parenting plan templates, financial tracking worksheets, asset division calculators, co-parenting communication scripts, decision checklists for major legal and financial choices, post-divorce budgeting templates, and more. Everything is designed to be immediately usable, not just informative.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question">
+            <h3>How do I get started?</h3>
+            <button class="faq-toggle">+</button>
+          </div>
+          <div class="faq-answer">
+            <p>Fill out the form below — it takes about two minutes. We'll get you set up with access to Phase 1 of the curriculum and the community. From there, you move at your own pace. If you want to talk to someone first, use the contact section below and we'll get back to you within one business day.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- JOIN SECTION -->
+  <section class="join-section" id="join">
+    <div class="container">
+      <div class="join-inner">
+        <div class="join-text fade-up">
+          <span class="eyebrow eyebrow--light">Get Started</span>
+          <h2>Join StructuredMan Today.</h2>
+          <p>Take the first step toward clarity. Getting started takes less than two minutes — and the structure you'll gain is worth every one of them.</p>
+          <p>Here's what you get from day one:</p>
+          <div class="join-bullets">
+            <div class="join-bullet"><div class="join-bullet-dot"></div>Immediate access to Phase 1 of the curriculum</div>
+            <div class="join-bullet"><div class="join-bullet-dot"></div>Your personal needs assessment tool</div>
+            <div class="join-bullet"><div class="join-bullet-dot"></div>Access to the StructuredMan community</div>
+            <div class="join-bullet"><div class="join-bullet-dot"></div>Core document templates and checklists</div>
+            <div class="join-bullet"><div class="join-bullet-dot"></div>Weekly guidance and milestone check-ins</div>
+          </div>
+        </div>
+        <div class="join-form fade-up fade-up-d1">
+          <h3>Create Your Account</h3>
+          <p class="join-form-sub">Start with Phase 1 — it's free.</p>
+          <div class="join-field">
+            <label>First Name</label>
+            <input type="text" placeholder="Your first name" />
+          </div>
+          <div class="join-field">
+            <label>Email Address</label>
+            <input type="email" placeholder="your@email.com" />
+          </div>
+          <div class="join-field">
+            <label>Where Are You in the Process?</label>
+            <select>
+              <option>Select one...</option>
+              <option>Considering separation</option>
+              <option>Separation in progress</option>
+              <option>Active divorce proceedings</option>
+              <option>Recently finalized</option>
+              <option>Rebuilding post-divorce</option>
+            </select>
+          </div>
+          <div class="join-field">
+            <label>Do You Have Children?</label>
+            <select>
+              <option>Select one...</option>
+              <option>Yes</option>
+              <option>No</option>
+            </select>
+          </div>
+          <button class="btn btn--amber join-submit">Start My Journey →</button>
+          <p class="join-disclaimer">By joining, you agree to our Terms of Service and Privacy Policy. We will never share your information with third parties.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="contact-strip">
+    <div class="container">
+      <div style="text-align:center;max-width:520px;margin:0 auto 48px;" class="fade-up">
+        <span class="eyebrow">Get in Touch</span>
+        <h2 style="font-size:2rem;margin-bottom:12px;">Still Have Questions?</h2>
+        <p style="color:var(--text-muted);">We're real people and we respond. Reach out through any of the channels below.</p>
+      </div>
+      <div class="contact-strip-inner">
+        <div class="contact-card fade-up fade-up-d1">
+          <div class="contact-icon">📧</div>
+          <h4>Email Us</h4>
+          <p>For general inquiries, partnership questions, or anything else.<br><a href="mailto:hello@structuredman.com">hello@structuredman.com</a></p>
+        </div>
+        <div class="contact-card fade-up fade-up-d2">
+          <div class="contact-icon">💬</div>
+          <h4>Community Forum</h4>
+          <p>Already a member? Post your question in the community — often the fastest way to get an experienced answer.</p>
+        </div>
+        <div class="contact-card fade-up fade-up-d3">
+          <div class="contact-icon">🤝</div>
+          <h4>Partner Inquiries</h4>
+          <p>Professionals interested in joining our network.<br><a href="partners.html">Visit the Partners page →</a></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <div class="footer-inner">
+        <div>
+          <div class="footer-brand-name">Structured<span>Man</span></div>
+          <p class="footer-desc">Structured guidance, practical tools, and a community for men navigating divorce and rebuilding their lives with clarity and purpose.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Navigate</h4>
+          <ul>
+            <li><a href="mission.html">Our Mission</a></li>
+            <li><a href="how-it-works.html">How It Works</a></li>
+            <li><a href="curriculum.html">Curriculum</a></li>
+            <li><a href="partners.html">Partners</a></li>
+            <li><a href="faq.html">FAQ</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Topics</h4>
+          <ul>
+            <li><a href="curriculum.html">Legal Navigation</a></li>
+            <li><a href="curriculum.html">Financial Rebuilding</a></li>
+            <li><a href="curriculum.html">Fatherhood</a></li>
+            <li><a href="curriculum.html">Emotional Resilience</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Company</h4>
+          <ul>
+            <li><a href="mission.html">About Us</a></li>
+            <li><a href="partners.html">Partners</a></li>
+            <li><a href="faq.html">Contact</a></li>
+            <li><a href="#">Privacy Policy</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© 2026 StructuredMan. All rights reserved.</span>
+        <div class="footer-bottom-links"><a href="#">Terms</a><a href="#">Privacy</a><a href="#">Accessibility</a></div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="main.js"></script>
+  <script>
+    // FAQ accordion
+    document.querySelectorAll('.faq-item').forEach(item => {
+      item.querySelector('.faq-question').addEventListener('click', () => {
+        const isOpen = item.classList.contains('open');
+        document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+        if (!isOpen) item.classList.add('open');
+      });
+    });
+    // Category tabs (visual)
+    document.querySelectorAll('.faq-cat-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.faq-cat-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+      });
+    });
+  </script>
+</body>
+</html>

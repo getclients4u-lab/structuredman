@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Our Mission — StructuredMan</title>
+  <meta name="description" content="StructuredMan exists because men navigating divorce deserve structured support, not silence. Learn why we built this platform and who it's for." />
+  <link rel="canonical" href="https://www.structuredman.com/mission.html" />
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .mission-intro { padding: 80px 0; }
+    .mission-intro-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+    .mission-intro-text h2 { margin-bottom: 20px; }
+    .mission-intro-text p { color: var(--text-muted); margin-bottom: 18px; line-height: 1.8; }
+    .mission-intro-text p strong { color: var(--text-main); }
+    .mission-visual-card {
+      background: var(--navy);
+      border-radius: var(--radius-lg);
+      padding: 48px 40px;
+      color: var(--cream);
+    }
+    .mission-visual-card blockquote {
+      font-family: var(--font-display);
+      font-size: 1.5rem;
+      line-height: 1.45;
+      margin-bottom: 24px;
+      border-left: 3px solid var(--amber);
+      padding-left: 20px;
+    }
+    .mission-visual-card cite { font-size: 13px; opacity: 0.55; font-style: normal; }
+
+    /* STATS ROW */
+    .stats-row { background: var(--navy); padding: 60px 0; }
+    .stats-inner { display: grid; grid-template-columns: repeat(4,1fr); gap: 32px; text-align: center; }
+    .stat-item-num {
+      font-family: var(--font-display);
+      font-size: 3rem; font-weight: 700;
+      color: var(--amber); line-height: 1;
+    }
+    .stat-item-label { font-size: 13px; color: rgba(245,240,232,0.6); margin-top: 8px; line-height: 1.5; }
+
+    /* VALUES */
+    .values { padding: 96px 0; background: var(--cream); }
+    .values-header { text-align: center; max-width: 580px; margin: 0 auto 60px; }
+    .values-header h2 { margin-bottom: 14px; }
+    .values-header p { color: var(--text-muted); }
+    .values-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 28px; }
+    .value-card {
+      background: var(--white);
+      border-radius: var(--radius-lg);
+      padding: 36px 30px;
+      box-shadow: var(--shadow-sm);
+      border-top: 4px solid var(--amber);
+    }
+    .value-icon { font-size: 36px; margin-bottom: 16px; }
+    .value-card h3 { font-size: 1.15rem; margin-bottom: 10px; }
+    .value-card p { font-size: 0.93rem; color: var(--text-muted); line-height: 1.7; }
+
+    /* STORY */
+    .story { padding: 96px 0; }
+    .story-inner { max-width: 760px; margin: 0 auto; }
+    .story-inner h2 { margin-bottom: 28px; }
+    .story-inner p { color: var(--text-muted); line-height: 1.85; margin-bottom: 20px; font-size: 1.02rem; }
+    .story-inner p strong { color: var(--text-main); }
+    .story-pull {
+      font-family: var(--font-display);
+      font-size: 1.45rem;
+      color: var(--navy);
+      border-left: 4px solid var(--amber);
+      padding: 20px 28px;
+      margin: 40px 0;
+      line-height: 1.5;
+      background: var(--cream);
+      border-radius: 0 var(--radius-md) var(--radius-md) 0;
+    }
+
+    @media(max-width:960px){
+      .mission-intro-grid{ grid-template-columns:1fr; }
+      .stats-inner{ grid-template-columns:1fr 1fr; }
+      .values-grid{ grid-template-columns:1fr 1fr; }
+    }
+    @media(max-width:640px){
+      .stats-inner{ grid-template-columns:1fr 1fr; gap:24px; }
+      .values-grid{ grid-template-columns:1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="container nav-inner">
+      <a href="index.html" class="nav-logo">Structured<span>Man</span></a>
+      <div class="nav-links">
+        <a href="mission.html">Our Mission</a>
+        <a href="how-it-works.html">How It Works</a>
+        <a href="curriculum.html">Curriculum</a>
+        <a href="partners.html">Partners</a>
+        <a href="faq.html">FAQ</a>
+        <a href="faq.html#join" class="btn btn--amber nav-cta">Get Started</a>
+      </div>
+      <button class="nav-hamburger" aria-label="Open menu"><span></span><span></span><span></span></button>
+    </div>
+  </nav>
+  <div class="mobile-menu">
+    <button class="mobile-close" aria-label="Close menu">✕</button>
+    <a href="index.html">Home</a>
+    <a href="mission.html">Our Mission</a>
+    <a href="how-it-works.html">How It Works</a>
+    <a href="curriculum.html">Curriculum</a>
+    <a href="partners.html">Partners</a>
+    <a href="faq.html">FAQ</a>
+    <a href="faq.html#join" class="btn btn--amber" style="margin-top:12px;">Get Started</a>
+  </div>
+
+  <!-- PAGE HERO -->
+  <section class="page-hero">
+    <div class="page-hero-grid"></div>
+    <div class="container page-hero-content">
+      <span class="eyebrow eyebrow--light">Why We Exist</span>
+      <h1>A Mission Built on<br>What Men Actually Need</h1>
+      <p>Divorce is one of life's most disorienting transitions — and men typically face it without a structured system of support. We're changing that.</p>
+    </div>
+  </section>
+
+  <!-- MISSION INTRO -->
+  <section class="mission-intro">
+    <div class="container">
+      <div class="mission-intro-grid">
+        <div class="mission-intro-text fade-up">
+          <span class="eyebrow">The Problem We're Solving</span>
+          <h2>The World Doesn't Have a Roadmap for Men After Divorce.</h2>
+          <p>Most men go through divorce without a structured guide — navigating legal decisions, financial resets, co-parenting logistics, and emotional upheaval all at once, simultaneously, without preparation.</p>
+          <p>The result is confusion, costly mistakes, missed opportunities to protect what matters, and a deep sense of isolation. Men are told to "be strong" but aren't given tools that actually help.</p>
+          <p><strong>StructuredMan was built to change that.</strong> We help men navigate divorce with tools, templates, and structured guidance that bring clarity to a fragmented process — from the moment separation begins to the day you're standing on solid ground again.</p>
+        </div>
+        <div class="fade-up fade-up-d1">
+          <div class="mission-visual-card">
+            <blockquote>"Divorce doesn't have to be the end of your story. It can be the first chapter of a better one — if you have the structure to write it."</blockquote>
+            <cite>— StructuredMan Mission Statement</cite>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STATS -->
+  <section class="stats-row">
+    <div class="container">
+      <div class="stats-inner">
+        <div class="fade-up fade-up-d1">
+          <div class="stat-item-num">73%</div>
+          <div class="stat-item-label">of men report feeling unprepared for life post-divorce</div>
+        </div>
+        <div class="fade-up fade-up-d2">
+          <div class="stat-item-num">1 in 2</div>
+          <div class="stat-item-label">marriages in the US end in divorce</div>
+        </div>
+        <div class="fade-up fade-up-d3">
+          <div class="stat-item-num">4×</div>
+          <div class="stat-item-label">men are more likely to face depression post-divorce without support</div>
+        </div>
+        <div class="fade-up fade-up-d4">
+          <div class="stat-item-num">2 yrs</div>
+          <div class="stat-item-label">average time to financial stability after divorce without guidance</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- VALUES -->
+  <section class="values">
+    <div class="container">
+      <div class="values-header fade-up">
+        <span class="eyebrow">What We Stand For</span>
+        <h2>Our Core Values</h2>
+        <p>Everything at StructuredMan is built around these principles — they shape our curriculum, our community, and how we show up for men every day.</p>
+      </div>
+      <div class="values-grid">
+        <div class="value-card fade-up fade-up-d1">
+          <div class="value-icon">🧭</div>
+          <h3>Clarity Over Complexity</h3>
+          <p>Divorce is already complicated enough. We strip away the noise and give men clear, sequenced steps — not overwhelming piles of information they don't know how to use.</p>
+        </div>
+        <div class="value-card fade-up fade-up-d2">
+          <div class="value-icon">💪</div>
+          <h3>Strength Through Structure</h3>
+          <p>We believe men perform best with frameworks, not fluffy advice. Every module, template, and tool is designed to translate into real action in the real world.</p>
+        </div>
+        <div class="value-card fade-up fade-up-d3">
+          <div class="value-icon">🤝</div>
+          <h3>Community Without Judgment</h3>
+          <p>Men don't share vulnerability easily. We've built a space where honesty is safe, experience is shared generously, and no one is left to figure it out alone.</p>
+        </div>
+        <div class="value-card fade-up fade-up-d1">
+          <div class="value-icon">👨‍👧‍👦</div>
+          <h3>Fathers First</h3>
+          <p>For men with children, being a great dad doesn't stop at separation. We put fatherhood at the center of our work because your kids need you — and you need the tools to show up for them.</p>
+        </div>
+        <div class="value-card fade-up fade-up-d2">
+          <div class="value-icon">📈</div>
+          <h3>Forward, Not Backward</h3>
+          <p>Divorce is a chapter, not the whole book. Our curriculum is built around momentum — helping men move from crisis to stability to genuine growth as quickly as possible.</p>
+        </div>
+        <div class="value-card fade-up fade-up-d3">
+          <div class="value-icon">🔍</div>
+          <h3>Honesty at Every Step</h3>
+          <p>We tell men what they need to hear, not just what they want to hear. Honest assessment of your situation — legal, financial, emotional — is the foundation of every good decision.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STORY SECTION -->
+  <section class="story">
+    <div class="container">
+      <div class="story-inner">
+        <span class="eyebrow">Our Story</span>
+        <h2>Built From Real Experience</h2>
+        <p>StructuredMan was founded by men who understood, from personal and professional experience, that the systems designed to help people through divorce weren't built with men in mind. Legal firms focus on cases. Therapy focuses on emotions. Financial advisors focus on assets. Nobody was connecting the dots.</p>
+        <div class="story-pull">
+          "We kept seeing the same mistakes, the same confusion, the same isolation — not because men weren't capable, but because they had no map."
+        </div>
+        <p>So we built the map. A structured, sequenced platform that gives men a clear path through one of life's most disorienting experiences — covering the legal, financial, emotional, and personal dimensions of divorce in a framework men can actually use.</p>
+        <p><strong>StructuredMan's objective is straightforward:</strong> build a scalable growth engine for men's post-divorce clarity by giving them the awareness, tools, and community they need to move forward with confidence — in their own lives, and in their relationships with their children.</p>
+        <p>The platform operates across four focused phases — building awareness, optimizing the divorce journey, strengthening a new foundation, and creating a forward-looking personal narrative. Every phase has been designed around the real questions and real pain points men face.</p>
+        <a href="how-it-works.html" class="btn btn--amber" style="margin-top:8px;">See How The Four Phases Work</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-banner">
+    <div class="container">
+      <span class="eyebrow" style="color:rgba(255,255,255,0.65);text-align:center;display:block;margin-bottom:20px;">Ready to Start?</span>
+      <h2>Join the Men Who Chose<br>Structure Over Chaos.</h2>
+      <p>Whether you're at the beginning of a separation or rebuilding after the fact — StructuredMan has a place for you.</p>
+      <div class="cta-actions">
+        <a href="how-it-works.html" class="btn btn--white">See How It Works</a>
+        <a href="curriculum.html" class="btn btn--amber-outline">Explore the Curriculum</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="container">
+      <div class="footer-inner">
+        <div>
+          <div class="footer-brand-name">Structured<span>Man</span></div>
+          <p class="footer-desc">Structured guidance, practical tools, and a community for men navigating divorce and rebuilding their lives with clarity and purpose.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Navigate</h4>
+          <ul>
+            <li><a href="mission.html">Our Mission</a></li>
+            <li><a href="how-it-works.html">How It Works</a></li>
+            <li><a href="curriculum.html">Curriculum</a></li>
+            <li><a href="partners.html">Partners</a></li>
+            <li><a href="faq.html">FAQ</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Topics</h4>
+          <ul>
+            <li><a href="curriculum.html">Legal Navigation</a></li>
+            <li><a href="curriculum.html">Financial Rebuilding</a></li>
+            <li><a href="curriculum.html">Fatherhood</a></li>
+            <li><a href="curriculum.html">Emotional Resilience</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Company</h4>
+          <ul>
+            <li><a href="mission.html">About Us</a></li>
+            <li><a href="partners.html">Partners</a></li>
+            <li><a href="faq.html">Contact</a></li>
+            <li><a href="#">Privacy Policy</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© 2026 StructuredMan. All rights reserved.</span>
+        <div class="footer-bottom-links"><a href="#">Terms</a><a href="#">Privacy</a><a href="#">Accessibility</a></div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="main.js"></script>
+</body>
+</html>
