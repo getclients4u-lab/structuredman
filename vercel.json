@@ -3,6 +3,9 @@
   "framework": null,
   "outputDirectory": ".",
   "routes": [
+    { "src": "/api/submit", "dest": "/api/submit.js" },
+    { "src": "/api/leads", "dest": "/api/leads.js" },
+    { "src": "/admin", "dest": "/admin.html" },
     { "src": "/(index|mission|how-it-works|curriculum|partners|faq)", "dest": "/$1.html" },
     { "src": "/(.*)", "dest": "/$1" }
   ]
