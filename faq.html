@@ -318,35 +318,38 @@
         <div class="join-form fade-up fade-up-d1">
           <h3>Create Your Account</h3>
           <p class="join-form-sub">Start with Phase 1 — it's free.</p>
-          <div class="join-field">
-            <label>First Name</label>
-            <input type="text" placeholder="Your first name" />
-          </div>
-          <div class="join-field">
-            <label>Email Address</label>
-            <input type="email" placeholder="your@email.com" />
-          </div>
-          <div class="join-field">
-            <label>Where Are You in the Process?</label>
-            <select>
-              <option>Select one...</option>
-              <option>Considering separation</option>
-              <option>Separation in progress</option>
-              <option>Active divorce proceedings</option>
-              <option>Recently finalized</option>
-              <option>Rebuilding post-divorce</option>
-            </select>
-          </div>
-          <div class="join-field">
-            <label>Do You Have Children?</label>
-            <select>
-              <option>Select one...</option>
-              <option>Yes</option>
-              <option>No</option>
-            </select>
-          </div>
-          <button class="btn btn--amber join-submit">Start My Journey →</button>
-          <p class="join-disclaimer">By joining, you agree to our Terms of Service and Privacy Policy. We will never share your information with third parties.</p>
+          <form id="lead-form" onsubmit="return submitLead(event)">
+            <div id="form-message" class="join-field" style="display:none;padding:12px;border-radius:8px;text-align:center;"></div>
+            <div class="join-field">
+              <label>First Name</label>
+              <input type="text" id="lead-name" placeholder="Your first name" required />
+            </div>
+            <div class="join-field">
+              <label>Email Address</label>
+              <input type="email" id="lead-email" placeholder="your@email.com" required />
+            </div>
+            <div class="join-field">
+              <label>Where Are You in the Process?</label>
+              <select id="lead-stage">
+                <option>Select one...</option>
+                <option>Considering separation</option>
+                <option>Separation in progress</option>
+                <option>Active divorce proceedings</option>
+                <option>Recently finalized</option>
+                <option>Rebuilding post-divorce</option>
+              </select>
+            </div>
+            <div class="join-field">
+              <label>Do You Have Children?</label>
+              <select id="lead-children">
+                <option>Select one...</option>
+                <option>Yes</option>
+                <option>No</option>
+              </select>
+            </div>
+            <button type="submit" class="btn btn--amber join-submit" id="form-submit-btn">Start My Journey →</button>
+          </form>
+          <p class="join-disclaimer" style="margin-top:14px;">By joining, you agree to our Terms of Service and Privacy Policy. We will never share your information with third parties.</p>
         </div>
       </div>
     </div>
@@ -440,6 +443,52 @@
         btn.classList.add('active');
       });
     });
+
+    // Lead form submission
+    async function submitLead(event) {
+      event.preventDefault();
+      const btn = document.getElementById('form-submit-btn');
+      const msg = document.getElementById('form-message');
+      const name = document.getElementById('lead-name').value.trim();
+      const email = document.getElementById('lead-email').value.trim();
+      const stage = document.getElementById('lead-stage').value;
+      const children = document.getElementById('lead-children').value;
+
+      btn.disabled = true;
+      btn.textContent = 'Submitting...';
+      msg.style.display = 'none';
+
+      try {
+        const res = await fetch('/api/submit', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ name, email, stage, children })
+        });
+        const data = await res.json();
+
+        if (res.ok && data.success) {
+          msg.style.display = 'block';
+          msg.style.background = 'rgba(46,204,113,0.15)';
+          msg.style.color = '#2ecc71';
+          msg.style.border = '1px solid rgba(46,204,113,0.3)';
+          msg.textContent = '✅ ' + data.message;
+          document.getElementById('lead-form').reset();
+        } else {
+          throw new Error(data.error || 'Submission failed');
+        }
+      } catch (err) {
+        msg.style.display = 'block';
+        msg.style.background = 'rgba(231,76,60,0.15)';
+        msg.style.color = '#e74c3c';
+        msg.style.border = '1px solid rgba(231,76,60,0.3)';
+        msg.textContent = '❌ ' + err.message + ' — please email hello@structuredman.com';
+      } finally {
+        btn.disabled = false;
+        btn.textContent = 'Start My Journey →';
+      }
+
+      return false;
+    }
   </script>
 </body>
 </html>
