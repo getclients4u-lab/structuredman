@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Phase Finder — StructuredMan</title>
+  <meta name="description" content="Not sure where you are in your divorce journey? Take the 2-minute Phase Finder and get your personalized starting point across StructuredMan's four phases." />
+  <meta property="og:title" content="Phase Finder — StructuredMan" />
+  <meta property="og:description" content="2 minutes. 8 questions. Find out which phase of your divorce journey you're in — and what to do next." />
+  <meta property="og:type" content="website" />
+  <link rel="canonical" href="https://www.structuredman.com/phase-finder.html" />
+  <style>
+    :root {
+      --navy:       #0D1B2A;
+      --navy-mid:   #162032;
+      --navy-light: #1E3A5F;
+      --steel:      #2D6A9F;
+      --steel-light:#4A90C4;
+      --amber:      #C9862A;
+      --amber-light:#E0A04A;
+      --cream:      #F5F0E8;
+      --cream-dark: #EDE7D9;
+      --white:      #FFFFFF;
+      --text-main:  #0D1B2A;
+      --text-muted: #5A6A78;
+      --text-light: #8FA3B1;
+      --border:     #D6D0C6;
+      --radius-sm:  4px;
+      --radius-md:  10px;
+      --radius-lg:  20px;
+      --font-display: Georgia, 'Times New Roman', serif;
+      --font-body:    -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: var(--font-body);
+      background: var(--navy);
+      color: var(--cream);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      -webkit-font-smoothing: antialiased;
+    }
+    .container { max-width: 720px; margin: 0 auto; padding: 0 24px; width: 100%; }
+
+    /* NAV */
+    nav {
+      position: sticky; top: 0; z-index: 50;
+      background: rgba(13,27,42,0.92);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+    .nav-inner { display: flex; align-items: center; justify-content: space-between; padding: 18px 24px; max-width: 1160px; margin: 0 auto; }
+    .nav-brand { font-family: var(--font-display); font-size: 1.25rem; font-weight: 700; color: var(--cream); text-decoration: none; }
+    .nav-brand span { color: var(--amber); }
+    .nav-links { display: flex; gap: 28px; align-items: center; }
+    .nav-links a { color: rgba(245,240,232,0.75); text-decoration: none; font-size: 0.9rem; font-weight: 600; transition: color 0.15s; }
+    .nav-links a:hover { color: var(--amber-light); }
+    .nav-links a.nav-cta {
+      background: var(--amber); color: var(--navy);
+      padding: 9px 18px; border-radius: var(--radius-sm);
+      font-weight: 700;
+    }
+    .nav-links a.nav-cta:hover { background: var(--amber-light); color: var(--navy); }
+    @media (max-width: 640px) { .nav-links a:not(.nav-cta) { display: none; } }
+
+    /* HERO */
+    .hero { text-align: center; padding: 72px 0 40px; }
+    .eyebrow {
+      font-size: 11px; font-weight: 700; letter-spacing: 0.18em;
+      text-transform: uppercase; color: var(--amber); margin-bottom: 18px; display: block;
+    }
+    .hero h1 {
+      font-family: var(--font-display);
+      font-size: clamp(2.2rem, 5vw, 3.4rem);
+      font-weight: 700; line-height: 1.15; margin-bottom: 16px;
+    }
+    .hero h1 em { color: var(--amber); font-style: normal; }
+    .hero p { color: rgba(245,240,232,0.72); font-size: 1.05rem; max-width: 520px; margin: 0 auto; line-height: 1.7; }
+    .hero .meta { margin-top: 22px; font-size: 0.85rem; color: rgba(245,240,232,0.45); letter-spacing: 0.04em; }
+
+    /* QUIZ CARD */
+    .quiz-wrap { flex: 1; padding-bottom: 80px; }
+    .quiz-card {
+      background: var(--navy-mid);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: var(--radius-lg);
+      padding: 40px 36px;
+      box-shadow: 0 12px 48px rgba(13,27,42,0.5);
+      min-height: 420px;
+      position: relative;
+    }
+    @media (max-width: 560px) { .quiz-card { padding: 28px 20px; } }
+
+    /* progress */
+    .progress-track { height: 4px; background: rgba(255,255,255,0.08); border-radius: 2px; margin-bottom: 32px; overflow: hidden; }
+    .progress-fill { height: 100%; background: var(--amber); border-radius: 2px; transition: width 0.35s ease; width: 0%; }
+    .progress-label { display: flex; justify-content: space-between; font-size: 0.78rem; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(245,240,232,0.5); margin-bottom: 10px; }
+
+    /* question */
+    .q-num { font-size: 11px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--amber-light); margin-bottom: 14px; }
+    .q-text { font-family: var(--font-display); font-size: clamp(1.25rem, 2.6vw, 1.6rem); font-weight: 700; line-height: 1.35; margin-bottom: 32px; }
+
+    .answers { display: flex; flex-direction: column; gap: 14px; }
+    .answer {
+      display: flex; align-items: flex-start; gap: 14px;
+      background: rgba(255,255,255,0.04);
+      border: 1.5px solid rgba(255,255,255,0.1);
+      border-radius: var(--radius-md);
+      padding: 18px 20px;
+      cursor: pointer;
+      transition: border-color 0.15s, background 0.15s, transform 0.1s;
+      color: var(--cream);
+      font-size: 0.98rem;
+      line-height: 1.5;
+      text-align: left;
+      font-family: var(--font-body);
+      width: 100%;
+    }
+    .answer:hover { border-color: var(--steel-light); background: rgba(255,255,255,0.07); }
+    .answer.selected { border-color: var(--amber); background: rgba(201,134,42,0.12); }
+    .answer .key {
+      flex-shrink: 0;
+      width: 26px; height: 26px; border-radius: 50%;
+      border: 1.5px solid rgba(245,240,232,0.3);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.75rem; font-weight: 700; letter-spacing: 0.02em;
+      margin-top: 1px;
+    }
+    .answer.selected .key { background: var(--amber); border-color: var(--amber); color: var(--navy); }
+
+    .quiz-actions { display: flex; justify-content: space-between; align-items: center; margin-top: 32px; gap: 16px; }
+    .btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 13px 26px; border-radius: var(--radius-sm);
+      font-size: 14px; font-weight: 700; letter-spacing: 0.04em;
+      cursor: pointer; border: none; text-decoration: none;
+      transition: transform 0.15s ease, background 0.15s ease, opacity 0.15s;
+    }
+    .btn:disabled { opacity: 0.35; cursor: not-allowed; }
+    .btn--amber { background: var(--amber); color: var(--navy); }
+    .btn--amber:hover:not(:disabled) { background: var(--amber-light); transform: translateY(-1px); }
+    .btn--ghost { background: transparent; color: rgba(245,240,232,0.65); border: 1.5px solid rgba(255,255,255,0.15); }
+    .btn--ghost:hover:not(:disabled) { border-color: rgba(255,255,255,0.4); color: var(--cream); }
+    .btn--white { background: var(--cream); color: var(--navy); }
+    .btn--white:hover { background: var(--white); transform: translateY(-1px); }
+    .btn--outline { background: transparent; color: var(--cream); border: 1.5px solid var(--amber); }
+    .btn--outline:hover { background: rgba(201,134,42,0.12); }
+
+    .q-fade { animation: qfade 0.3s ease; }
+    @keyframes qfade { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+    /* RESULT */
+    .result { text-align: center; padding: 10px 0 4px; }
+    .result .badge {
+      display: inline-block;
+      font-size: 11px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--navy); background: var(--amber);
+      padding: 8px 18px; border-radius: 999px; margin-bottom: 22px;
+    }
+    .result h2 { font-family: var(--font-display); font-size: clamp(1.8rem, 4vw, 2.5rem); margin-bottom: 10px; line-height: 1.2; }
+    .result .phase-sub { color: var(--amber-light); font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; font-size: 0.85rem; margin-bottom: 22px; }
+    .result p.desc { color: rgba(245,240,232,0.78); line-height: 1.75; font-size: 1rem; max-width: 520px; margin: 0 auto 26px; }
+    .result .next-title { font-size: 11px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--text-light); margin-bottom: 14px; }
+    .next-list { list-style: none; text-align: left; max-width: 480px; margin: 0 auto 34px; display: flex; flex-direction: column; gap: 10px; }
+    .next-list li { display: flex; gap: 12px; align-items: flex-start; color: rgba(245,240,232,0.85); font-size: 0.95rem; line-height: 1.5; }
+    .next-list li::before { content: "→"; color: var(--amber); font-weight: 700; flex-shrink: 0; }
+    .result-ctas { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+    .result-note { margin-top: 26px; font-size: 0.8rem; color: rgba(245,240,232,0.4); }
+    .result .phase-ring {
+      width: 96px; height: 96px; margin: 0 auto 24px; border-radius: 50%;
+      background: radial-gradient(circle at 30% 30%, var(--amber-light), var(--amber));
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--font-display); font-size: 2rem; font-weight: 700; color: var(--navy);
+      box-shadow: 0 8px 32px rgba(201,134,42,0.35);
+    }
+
+    /* FOOTER */
+    footer { border-top: 1px solid rgba(255,255,255,0.07); padding: 28px 0; margin-top: auto; }
+    .footer-inner { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; }
+    .footer-inner span { color: rgba(245,240,232,0.4); font-size: 0.82rem; }
+    .footer-inner a { color: rgba(245,240,232,0.55); font-size: 0.82rem; text-decoration: none; }
+    .footer-inner a:hover { color: var(--amber-light); }
+  </style>
+</head>
+<body>
+  <nav>
+    <div class="nav-inner">
+      <a class="nav-brand" href="index.html">Structured<span>Man</span></a>
+      <div class="nav-links">
+        <a href="how-it-works.html">How It Works</a>
+        <a href="curriculum.html">Curriculum</a>
+        <a href="faq.html">FAQ</a>
+        <a href="faq.html#join" class="nav-cta">Get Started</a>
+      </div>
+    </div>
+  </nav>
+
+  <section class="hero">
+    <div class="container">
+      <span class="eyebrow">The Phase Finder</span>
+      <h1>Where are you in your <em>divorce journey</em>?</h1>
+      <p>Eight honest questions. Two minutes. A clear picture of which phase you're in — and the exact next step to move forward.</p>
+      <div class="meta">NOT a diagnosis · Just a mirror · Built on StructuredMan's four-phase framework</div>
+    </div>
+  </section>
+
+  <section class="quiz-wrap">
+    <div class="container">
+      <div class="quiz-card" id="quizCard">
+        <div class="progress-label"><span id="pLabel">Question 1 of 8</span><span id="pPct">0%</span></div>
+        <div class="progress-track"><div class="progress-fill" id="pFill"></div></div>
+        <div id="stage"></div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <div class="footer-inner">
+        <span>© 2026 StructuredMan. All rights reserved.</span>
+        <a href="curriculum.html">Explore the Curriculum</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // ===== QUESTIONS =====
+    // Each answer maps to a phase: 1-4
+    const QUESTIONS = [
+      {
+        text: "When you think about your divorce, which feeling is loudest?",
+        answers: [
+          { label: "Confusion — I don't have a clear picture of what's actually happening.", phase: 1 },
+          { label: "Overwhelm — I know what's happening, it's just a lot to manage.", phase: 2 }
+        ]
+      },
+      {
+        text: "How clear are you on your legal situation right now?",
+        answers: [
+          { label: "I'm still figuring out my options — what I'm entitled to, what to expect.", phase: 1 },
+          { label: "I understand the process — I'm in the middle of executing it.", phase: 2 }
+        ]
+      },
+      {
+        text: "What's your biggest fear right now?",
+        answers: [
+          { label: "Making a costly decision based on incomplete information.", phase: 1 },
+          { label: "Losing ground in negotiations — financially or with the kids.", phase: 2 }
+        ]
+      },
+      {
+        text: "How would you describe your day-to-day structure?",
+        answers: [
+          { label: "Reactive — every day is driven by whatever crisis shows up.", phase: 3 },
+          { label: "Structured — I have routines and systems that hold me up.", phase: 4 }
+        ]
+      },
+      {
+        text: "Where do your finances stand?",
+        answers: [
+          { label: "I have no real post-divorce budget or rebuild plan yet.", phase: 3 },
+          { label: "I've rebuilt — I budget, track, and plan for the future.", phase: 4 }
+        ]
+      },
+      {
+        text: "When you imagine life after divorce, what do you see?",
+        answers: [
+          { label: "Survival — I just need to get through this in one piece.", phase: 3 },
+          { label: "A new chapter — I'm ready to build the story of who I'm becoming.", phase: 4 }
+        ]
+      },
+      {
+        text: "How do you feel about co-parenting and family logistics?",
+        answers: [
+          { label: "We need systems — schedules, communication, ground rules.", phase: 3 },
+          { label: "It's workable — I'm focused on my own foundation now.", phase: 4 }
+        ]
+      },
+      {
+        text: "What would help you most this week?",
+        answers: [
+          { label: "A map of my situation — legal, financial, emotional — so I can act with clarity.", phase: 1 },
+          { label: "A strategy for the negotiation or decision ahead of me.", phase: 2 }
+        ]
+      }
+    ];
+
+    // ===== PHASE RESULTS =====
+    const PHASES = {
+      1: {
+        num: "01",
+        title: "Build Awareness & Find Your Footing",
+        tagline: "Clarity From Day One",
+        desc: "Most men enter divorce with a fragmented understanding of what's happening — legally, financially, and emotionally. You're in Phase One: time to establish a clear, honest picture of where you stand, so every decision is grounded in reality, not fear.",
+        next: [
+          "Self-assess your legal, financial, and emotional situation honestly",
+          "Identify your specific pain points — the real ones, not the surface ones",
+          "Build your personal needs map for the journey ahead",
+          "Understand your options before making any major decisions"
+        ]
+      },
+      2: {
+        num: "02",
+        title: "Optimize the Divorce Journey",
+        tagline: "Strategy Over Reaction",
+        desc: "You have awareness — now it's about strategy. Phase Two covers the end-to-end process: legal proceedings, parenting plans, financial negotiations, and communication tactics. The goal: move with intent, not adrenaline.",
+        next: [
+          "Get a validated action plan for the legal process",
+          "Build your negotiation strategy — financial and parenting",
+          "Set communication ground rules that protect your headspace",
+          "Learn what to optimize now vs. what to leave until later"
+        ]
+      },
+      3: {
+        num: "03",
+        title: "Strengthen Your Foundation",
+        tagline: "Systems That Hold",
+        desc: "The immediate decisions are behind you — now the real work begins: building systems that hold. Phase Three is about the operational scaffolding of your new life: finances, housing, co-parenting logistics, health, and routines.",
+        next: [
+          "Rebuild your post-divorce budget and financial operating system",
+          "Restructure housing, logistics, and daily practicalities",
+          "Set up co-parenting systems and communication tools",
+          "Track your recovery with clear, measurable milestones"
+        ]
+      },
+      4: {
+        num: "04",
+        title: "Create Your Growth Narrative",
+        tagline: "The Next Chapter Starts Here",
+        desc: "You've built the structure — now you get to write the story. Phase Four is about defining your identity, building momentum in your personal and professional life, and becoming the man the next chapter deserves.",
+        next: [
+          "Define the narrative of who you're becoming — on your terms",
+          "Set personal and professional growth goals that excite you",
+          "Build momentum with habits, relationships, and purpose",
+          "Stop asking \u201chow do I get through this\u201d — start asking \u201cwho do I want to be\u201d"
+        ]
+      }
+    };
+
+    // ===== QUIZ ENGINE =====
+    const stage = document.getElementById('stage');
+    const pFill = document.getElementById('pFill');
+    const pLabel = document.getElementById('pLabel');
+    const pPct = document.getElementById('pPct');
+
+    let idx = 0;
+    const scores = { 1: 0, 2: 0, 3: 0, 4: 0 };
+    const answers = []; // answers[i] = phase chosen for question i
+    let selected = null;
+
+    function renderQuestion() {
+      const q = QUESTIONS[idx];
+      selected = null;
+      const prog = (idx / QUESTIONS.length) * 100;
+      pFill.style.width = prog + '%';
+      pLabel.textContent = 'Question ' + (idx + 1) + ' of ' + QUESTIONS.length;
+      pPct.textContent = Math.round(prog) + '%';
+
+      const answersHTML = q.answers.map((a, i) =>
+        '<button class="answer" data-phase="' + a.phase + '" data-i="' + i + '">' +
+        '<span class="key">' + String.fromCharCode(65 + i) + '</span><span>' + a.label + '</span></button>'
+      ).join('');
+
+      stage.innerHTML =
+        '<div class="q-fade">' +
+        '<div class="q-num">Step ' + (idx + 1) + ' of ' + QUESTIONS.length + '</div>' +
+        '<div class="q-text">' + q.text + '</div>' +
+        '<div class="answers">' + answersHTML + '</div>' +
+        '<div class="quiz-actions">' +
+        (idx > 0 ? '<button class="btn btn--ghost" id="backBtn">← Back</button>' : '<span></span>') +
+        '<button class="btn btn--amber" id="nextBtn" disabled>' + (idx === QUESTIONS.length - 1 ? 'See My Phase →' : 'Next →') + '</button>' +
+        '</div></div>';
+
+      stage.querySelectorAll('.answer').forEach(btn => {
+        btn.addEventListener('click', () => {
+          stage.querySelectorAll('.answer').forEach(b => b.classList.remove('selected'));
+          btn.classList.add('selected');
+          selected = parseInt(btn.dataset.phase, 10);
+          document.getElementById('nextBtn').disabled = false;
+        });
+      });
+
+      const nextBtn = document.getElementById('nextBtn');
+      nextBtn.addEventListener('click', () => {
+        if (selected === null) return;
+        answers[idx] = selected;
+        idx++;
+        if (idx < QUESTIONS.length) { renderQuestion(); }
+        else { renderResult(); }
+      });
+
+      const backBtn = document.getElementById('backBtn');
+      if (backBtn) backBtn.addEventListener('click', () => {
+        if (idx > 0) {
+          answers.pop();
+          idx--;
+          renderQuestion();
+        }
+      });
+    }
+
+    function renderResult() {
+      pFill.style.width = '100%';
+      pPct.textContent = '100%';
+      pLabel.textContent = 'Your result';
+
+      // Rebuild scores from answers array (Back-safe)
+      scores[1] = scores[2] = scores[3] = scores[4] = 0;
+      answers.forEach(a => { if (a) scores[a]++; });
+
+      // Highest score wins; tie-break toward earlier phase (foundation first)
+      let top = 1;
+      for (let p = 2; p <= 4; p++) { if (scores[p] > scores[top]) top = p; }
+      const ph = PHASES[top];
+
+      const nextItems = ph.next.map(n => '<li>' + n + '</li>').join('');
+      stage.innerHTML =
+        '<div class="result q-fade">' +
+        '<div class="badge">Your Phase: ' + ph.num + ' of 4</div>' +
+        '<div class="phase-ring">' + ph.num + '</div>' +
+        '<h2>' + ph.title + '</h2>' +
+        '<div class="phase-sub">' + ph.tagline + '</div>' +
+        '<p class="desc">' + ph.desc + '</p>' +
+        '<div class="next-title">Your Next Moves</div>' +
+        '<ul class="next-list">' + nextItems + '</ul>' +
+        '<div class="result-ctas">' +
+        '<a class="btn btn--white" href="curriculum.html">Explore the Curriculum</a>' +
+        '<a class="btn btn--outline" href="faq.html#join">Get a Guided Plan</a>' +
+        '</div>' +
+        '<div class="result-note">Every journey starts with a clear picture of where you are. This is yours — free of charge.</div>' +
+        '</div>';
+
+      // Save for retake
+      stage.innerHTML += '<div style="text-align:center;margin-top:18px;"><button class="btn btn--ghost" id="retakeBtn">↺ Retake the Quiz</button></div>';
+      document.getElementById('retakeBtn').addEventListener('click', () => {
+        idx = 0; answers.length = 0; for (const k in scores) scores[k] = 0; renderQuestion();
+      });
+
+      // Scroll result into view
+      document.getElementById('quizCard').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    renderQuestion();
+  </script>
+</body>
+</html>
