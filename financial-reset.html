@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Financial Reset Calculator — StructuredMan</title>
+<meta name="description" content="Know exactly where you stand financially after divorce. Calculate your monthly runway, debt load, and get a 90-day rebuilding plan — built by StructuredMan.">
+<meta name="robots" content="index, follow">
+<meta property="og:title" content="Financial Reset Calculator — StructuredMan">
+<meta property="og:description" content="Your post-divorce money reality check: monthly surplus, survival runway, and a 90-day plan to rebuild.">
+<meta property="og:type" content="website">
+<style>
+:root{
+  --navy:#0D1B2A; --navy-mid:#162032; --navy-light:#1E3A5F;
+  --steel:#2D6A9F; --steel-light:#4A90C4;
+  --amber:#C9862A; --amber-light:#E0A04A;
+  --cream:#F5F0E8; --cream-dark:#EDE7D9;
+  --white:#FFFFFF; --text-main:#0D1B2A; --text-muted:#5A6A78; --text-light:#8FA3B1;
+  --border:#D6D0C6; --green:#2E7D5B; --red:#B3472E;
+  --radius-sm:4px; --radius-md:10px; --radius-lg:20px;
+  --font-display:Georgia,'Times New Roman',serif;
+  --font-body:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
+  --shadow-md:0 4px 20px rgba(13,27,42,0.12); --shadow-lg:0 12px 48px rgba(13,27,42,0.18);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--font-body);background:var(--cream);color:var(--text-main);line-height:1.6;padding-bottom:60px}
+.wrap{max-width:980px;margin:0 auto;padding:0 20px}
+
+/* NAV */
+nav{background:var(--navy);padding:16px 0;position:sticky;top:0;z-index:50;box-shadow:var(--shadow-md)}
+.nav-inner{display:flex;align-items:center;justify-content:space-between;gap:16px}
+.nav-logo{color:var(--white);font-family:var(--font-display);font-size:22px;font-weight:700;text-decoration:none;letter-spacing:.3px}
+.nav-logo span{color:var(--amber)}
+.nav-links{display:flex;gap:22px;align-items:center}
+.nav-links a{color:var(--cream);text-decoration:none;font-size:14px;font-weight:600;letter-spacing:.4px;transition:color .2s}
+.nav-links a:hover{color:var(--amber-light)}
+.nav-links a.active{color:var(--amber)}
+@media(max-width:600px){.nav-links a:not(.active){display:none}}
+
+/* HERO */
+.hero{background:linear-gradient(135deg,var(--navy) 0%,var(--navy-mid) 55%,var(--navy-light) 100%);color:var(--white);padding:56px 0 48px;text-align:center}
+.hero .eyebrow{color:var(--amber-light);font-size:13px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase}
+.hero h1{font-family:var(--font-display);font-size:clamp(30px,5vw,44px);font-weight:700;margin:14px auto 12px;max-width:760px;line-height:1.15}
+.hero p{color:#C9D6E2;font-size:17px;max-width:640px;margin:0 auto;line-height:1.65}
+.hero .cta{display:inline-block;margin-top:26px;background:var(--amber);color:var(--navy);font-weight:700;padding:13px 30px;border-radius:var(--radius-md);text-decoration:none;font-size:15px;letter-spacing:.4px;transition:background .2s,transform .15s}
+.hero .cta:hover{background:var(--amber-light);transform:translateY(-1px)}
+
+/* SECTIONS */
+.section{background:var(--white);border:1px solid var(--border);border-radius:var(--radius-lg);box-shadow:var(--shadow-md);padding:32px;margin-top:28px}
+.section h2{font-family:var(--font-display);font-size:24px;color:var(--navy);margin-bottom:6px}
+.section .sub{color:var(--text-muted);font-size:14px;margin-bottom:22px}
+
+/* FORM */
+.field{margin-bottom:18px}
+.field label{display:flex;justify-content:space-between;align-items:baseline;font-size:14px;font-weight:700;color:var(--navy);margin-bottom:6px}
+.field label .hint{font-weight:400;color:var(--text-light);font-size:12px}
+.field input[type=number]{width:100%;padding:11px 14px;border:1px solid var(--border);border-radius:var(--radius-sm);font-size:16px;font-family:var(--font-body);background:var(--cream);color:var(--text-main);transition:border .2s}
+.field input[type=number]:focus{outline:none;border-color:var(--steel);background:var(--white);box-shadow:0 0 0 3px rgba(45,106,159,.15)}
+.field .range-row{display:flex;align-items:center;gap:12px}
+.field input[type=range]{flex:1;accent-color:var(--steel);height:5px;cursor:pointer}
+.range-val{min-width:120px;text-align:right;font-size:15px;font-weight:700;color:var(--navy);font-variant-numeric:tabular-nums}
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:0 26px}
+@media(max-width:640px){.grid-2{grid-template-columns:1fr}}
+
+/* RESULTS */
+.result{display:none;margin-top:8px}
+.result.show{display:block;animation:rise .5s ease}
+@keyframes rise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
+.score-row{display:grid;grid-template-columns:auto 1fr;gap:28px;align-items:center;margin-bottom:24px}
+@media(max-width:640px){.score-row{grid-template-columns:1fr;text-align:center}}
+.gauge{position:relative;width:170px;height:170px;margin:0 auto}
+.gauge svg{transform:rotate(-90deg)}
+.gauge .num{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.gauge .num b{font-family:var(--font-display);font-size:44px;color:var(--navy);line-height:1}
+.gauge .num span{font-size:12px;color:var(--text-muted);font-weight:700;letter-spacing:1.5px;text-transform:uppercase;margin-top:4px}
+.verdict h3{font-family:var(--font-display);font-size:22px;color:var(--navy);margin-bottom:8px}
+.verdict p{color:var(--text-muted);font-size:15px}
+.big-number{background:var(--navy);color:var(--white);border-radius:var(--radius-md);padding:18px 22px;margin-top:16px;display:flex;align-items:baseline;gap:14px;flex-wrap:wrap}
+.big-number .lbl{font-size:13px;color:#A9BED2;font-weight:700;letter-spacing:1px;text-transform:uppercase}
+.big-number .val{font-family:var(--font-display);font-size:30px;color:var(--amber-light);font-weight:700}
+.kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin:24px 0}
+@media(max-width:640px){.kpis{grid-template-columns:1fr}}
+.kpi{background:var(--cream);border:1px solid var(--border);border-radius:var(--radius-md);padding:16px;text-align:center}
+.kpi .v{font-family:var(--font-display);font-size:26px;font-weight:700;color:var(--navy)}
+.kpi .v.good{color:var(--green)} .kpi .v.bad{color:var(--red)} .kpi .v.warn{color:var(--amber)}
+.kpi .k{font-size:12px;color:var(--text-muted);font-weight:700;letter-spacing:1px;text-transform:uppercase;margin-top:4px}
+.flag-list{list-style:none;margin:16px 0 0}
+.flag-list li{padding:12px 16px;border-left:4px solid var(--amber);background:var(--cream);border-radius:0 var(--radius-sm) var(--radius-sm) 0;margin-bottom:10px;font-size:14px;color:var(--text-main)}
+.flag-list li strong{color:var(--navy)}
+.flag-list li.ok{border-left-color:var(--green);background:#F0F6F2}
+.flag-list li.bad{border-left-color:var(--red);background:#FBF1EE}
+
+/* PLAN */
+.plan{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;margin-top:8px}
+@media(max-width:720px){.plan{grid-template-columns:1fr}}
+.phase{background:var(--cream);border:1px solid var(--border);border-radius:var(--radius-md);padding:18px;display:flex;flex-direction:column;gap:8px}
+.phase .tag{font-size:11px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;color:var(--steel)}
+.phase h4{font-family:var(--font-display);font-size:17px;color:var(--navy)}
+.phase ul{list-style:none;display:flex;flex-direction:column;gap:7px;flex:1}
+.phase li{font-size:13.5px;color:var(--text-main);padding-left:18px;position:relative}
+.phase li::before{content:"→";position:absolute;left:0;color:var(--amber);font-weight:700}
+.phase .days{font-size:12px;color:var(--text-muted);font-weight:700}
+
+/* BUTTONS */
+.actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:26px}
+.btn{display:inline-block;padding:13px 26px;border-radius:var(--radius-md);font-size:15px;font-weight:700;cursor:pointer;text-decoration:none;border:none;transition:all .2s;letter-spacing:.3px}
+.btn--primary{background:var(--navy);color:var(--white)}
+.btn--primary:hover{background:var(--navy-light);transform:translateY(-1px)}
+.btn--amber{background:var(--amber);color:var(--navy)}
+.btn--amber:hover{background:var(--amber-light);transform:translateY(-1px)}
+.btn--ghost{background:transparent;color:var(--navy);border:1.5px solid var(--border)}
+.btn--ghost:hover{border-color:var(--navy)}
+.btn--small{padding:9px 16px;font-size:13px}
+
+/* CTA BAND */
+.cta-band{background:var(--navy);color:var(--white);border-radius:var(--radius-lg);padding:38px 32px;text-align:center;margin-top:32px}
+.cta-band h2{font-family:var(--font-display);font-size:26px;margin-bottom:10px}
+.cta-band p{color:#C9D6E2;max-width:560px;margin:0 auto 22px;font-size:15px}
+.cta-band .btn--amber{font-size:16px;padding:15px 36px}
+.footnote{margin-top:18px;font-size:12.5px;color:var(--text-light);line-height:1.7}
+.print-only{display:none}
+@media print{
+  nav,.actions,.cta-band,.footnote{display:none!important}
+  body{background:var(--white);padding:0}
+  .section{box-shadow:none;border:none;padding:0}
+  .result{display:block!important}
+  .print-only{display:block}
+  .result .section{margin-top:20px;break-inside:avoid}
+}
+.confetti{position:fixed;top:-12px;width:10px;height:10px;z-index:99;pointer-events:none;animation:fall 2.6s linear forwards}
+@keyframes fall{to{transform:translateY(110vh) rotate(720deg);opacity:0}}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap nav-inner">
+    <a class="nav-logo" href="https://www.structuredman.com/">Structured<span>Man</span></a>
+    <div class="nav-links">
+      <a href="https://www.structuredman.com/how-it-works.html">How It Works</a>
+      <a href="https://www.structuredman.com/curriculum.html">Curriculum</a>
+      <a href="https://www.structuredman.com/faq.html">FAQ</a>
+      <a href="https://www.structuredman.com/phase-finder.html">Phase Finder</a>
+      <a class="active" href="#">Financial Reset</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="eyebrow">Financial Rebuilding · Core Area Tool</div>
+    <h1>Your Money After Divorce: Stop Guessing. Start Knowing.</h1>
+    <p>Divorce scrambles your finances in one of the most stressful moments of your life. This calculator gives you the three numbers that matter most — your monthly surplus, your survival runway, and your debt load — plus a 90-day plan to rebuild from here.</p>
+    <a class="cta" href="#calculator">Get My Financial Reset ↓</a>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <section class="section" id="calculator">
+    <h2>Your Financial Reality Check</h2>
+    <p class="sub">Be honest with the numbers. Rough estimates are fine — the point is direction, not precision. Every field has a sensible default for demo.</p>
+
+    <form id="calc-form">
+      <div class="grid-2">
+        <div>
+          <div class="field">
+            <label for="income">Monthly take-home income <span class="hint">after tax</span></label>
+            <div class="range-row">
+              <input type="range" id="income-r" min="1500" max="20000" step="100" value="6400">
+              <input type="number" id="income" value="6400" step="100" min="0">
+            </div>
+          </div>
+          <div class="field">
+            <label for="expenses">Monthly living expenses <span class="hint">groceries, gas, insurance, kids, everything except housing</span></label>
+            <div class="range-row">
+              <input type="range" id="expenses-r" min="500" max="15000" step="50" value="3100">
+              <input type="number" id="expenses" value="3100" step="50" min="0">
+            </div>
+          </div>
+          <div class="field">
+            <label for="housing">New monthly housing cost <span class="hint">rent/mortgage + utilities — usually the biggest surprise</span></label>
+            <div class="range-row">
+              <input type="range" id="housing-r" min="0" max="8000" step="50" value="1750">
+              <input type="number" id="housing" value="1750" step="50" min="0">
+            </div>
+          </div>
+          <div class="field">
+            <label for="support">Monthly support paid <span class="hint">alimony + child support combined, if any</span></label>
+            <div class="range-row">
+              <input type="range" id="support-r" min="0" max="10000" step="50" value="900">
+              <input type="number" id="support" value="900" step="50" min="0">
+            </div>
+          </div>
+        </div>
+        <div>
+          <div class="field">
+            <label for="settlement">One-time cash from settlement <span class="hint">after lawyers and fees — the money you walk away with</span></label>
+            <div class="range-row">
+              <input type="range" id="settlement-r" min="0" max="500000" step="1000" value="48000">
+              <input type="number" id="settlement" value="48000" step="1000" min="0">
+            </div>
+          </div>
+          <div class="field">
+            <label for="savings">Liquid savings <span class="hint">bank + brokerage you could actually access this month</span></label>
+            <div class="range-row">
+              <input type="range" id="savings-r" min="0" max="200000" step="500" value="8500">
+              <input type="number" id="savings" value="8500" step="500" min="0">
+            </div>
+          </div>
+          <div class="field">
+            <label for="debt">Total debt <span class="hint">credit cards, personal loans, car, back taxes — not the mortgage you're leaving</span></label>
+            <div class="range-row">
+              <input type="range" id="debt-r" min="0" max="150000" step="500" value="21500">
+              <input type="number" id="debt" value="21500" step="500" min="0">
+            </div>
+          </div>
+          <div class="field">
+            <label for="months">Monthly debt minimums <span class="hint">what you're actually paying on that debt each month</span></label>
+            <div class="range-row">
+              <input type="range" id="months-r" min="0" max="5000" step="25" value="640">
+              <input type="number" id="months" value="640" step="25" min="0">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="actions">
+        <button type="submit" class="btn btn--primary">Calculate My Reset</button>
+        <button type="button" id="demo" class="btn btn--ghost">🎲 Try a scenario</button>
+      </div>
+    </form>
+  </section>
+
+  <div class="result" id="result">
+    <section class="section">
+      <h2>Your Financial Reset Score</h2>
+      <p class="sub">A clear read on where you stand — not a judgment, a starting line.</p>
+
+      <div class="score-row">
+        <div class="gauge">
+          <svg width="170" height="170" viewBox="0 0 170 170">
+            <circle cx="85" cy="85" r="72" fill="none" stroke="#E3DCCF" stroke-width="14"/>
+            <circle id="gauge-arc" cx="85" cy="85" r="72" fill="none" stroke="#C9862A" stroke-width="14" stroke-linecap="round" stroke-dasharray="452.4" stroke-dashoffset="452.4"/>
+          </svg>
+          <div class="num"><b id="score-num">0</b><span>/ 100</span></div>
+        </div>
+        <div class="verdict">
+          <h3 id="verdict-title">Your score</h3>
+          <p id="verdict-text">Calculating…</p>
+          <div class="big-number">
+            <span class="lbl">Your break-even number</span>
+            <span class="val" id="break-even">$0</span>
+            <span class="lbl" style="font-size:12px">/ month you need to cover everything</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="kpis">
+        <div class="kpi"><div class="v" id="kpi-surplus">$0</div><div class="k">Monthly Surplus</div></div>
+        <div class="kpi"><div class="v" id="kpi-runway">0 mo</div><div class="k">Survival Runway</div></div>
+        <div class="kpi"><div class="v" id="kpi-debt">0%</div><div class="k">Debt-to-Income</div></div>
+      </div>
+
+      <ul class="flag-list" id="flags"></ul>
+
+      <div class="print-only">
+        <p style="font-size:12px;color:#8FA3B1;margin-top:14px">Generated by StructuredMan Financial Reset Calculator — structuredman.com</p>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>Your 90-Day Rebuilding Plan</h2>
+      <p class="sub">Three phases. Each one has a single job. Follow the order — don't skip ahead to "investing" while the roof is leaking.</p>
+      <div class="plan" id="plan"></div>
+    </section>
+
+    <div class="cta-band">
+      <h2>The numbers are the easy part. The hard part is the week-by-week execution.</h2>
+      <p>StructuredMan's Financial Rebuilding module walks you through splitting assets, rebuilding credit, and building a budget that holds — with templates, checklists, and a roadmap. You don't have to figure this out alone.</p>
+      <a class="btn btn--amber" href="https://www.structuredman.com/curriculum.html#join">See the Full Curriculum</a>
+    </div>
+  </div>
+
+  <p class="footnote">This calculator is for orientation and planning only — not legal, tax, or financial advice. Every divorce is different, and state laws vary widely on support, property division, and debt allocation. Numbers are estimates based on what you enter. Review your real settlement documents and consult a licensed professional before acting on anything here.</p>
+</div>
+
+<script>
+(function(){
+  var $ = function(id){ return document.getElementById(id); };
+
+  // ---- sync range <-> number ----
+  var pairs = [['income','income-r'],['expenses','expenses-r'],['housing','housing-r'],['support','support-r'],['settlement','settlement-r'],['savings','savings-r'],['debt','debt-r'],['months','months-r']];
+  pairs.forEach(function(p){
+    var n = $(p[0]), r = $(p[1]);
+    r.addEventListener('input', function(){ n.value = r.value; });
+    n.addEventListener('input', function(){
+      var v = parseFloat(n.value); if(!isNaN(v) && v >= parseFloat(r.min) && v <= parseFloat(r.max)) r.value = v;
+    });
+  });
+
+  // ---- demo scenario ----
+  var demoData = { income:6400, expenses:3100, housing:1750, support:900, settlement:48000, savings:8500, debt:21500, months:640 };
+  function fillDemo(){
+    demoData.income = 4200 + Math.round(Math.random()*3800);
+    demoData.expenses = 1800 + Math.round(Math.random()*1400);
+    demoData.housing = 1100 + Math.round(Math.random()*1200);
+    demoData.support = Math.random() < 0.5 ? 0 : 300 + Math.round(Math.random()*1200);
+    demoData.settlement = 5000 + Math.round(Math.random()*70000);
+    demoData.savings = 500 + Math.round(Math.random()*15000);
+    demoData.debt = 2000 + Math.round(Math.random()*30000);
+    demoData.months = Math.round(demoData.debt * 0.03);
+    setAll(demoData); calculate();
+  }
+  function setAll(d){
+    pairs.forEach(function(p){ $(p[0]).value = d[p[0]]; $(p[1]).value = d[p[1]]; });
+  }
+
+  // ---- url params ?income=..&debt=.. etc ----
+  (function(){
+    try{
+      var q = new URLSearchParams(window.location.search);
+      var d = {};
+      pairs.forEach(function(p){ var v = parseFloat(q.get(p[0])); if(!isNaN(v)) d[p[0]] = v; });
+      if(Object.keys(d).length){ setAll(d); }
+      if(q.get('demo') === '1'){ fillDemo(); }
+    }catch(e){}
+  })();
+
+  // ---- money format ----
+  function fmt(n){ return '$' + Math.round(n).toLocaleString('en-US'); }
+  function fmtSigned(n){ return (n < 0 ? '−$' : '$') + Math.abs(Math.round(n)).toLocaleString('en-US'); }
+
+  // ---- calculate ----
+  function calculate(){
+    var income = +$('income').value || 0;
+    var expenses = +$('expenses').value || 0;
+    var housing = +$('housing').value || 0;
+    var support = +$('support').value || 0;
+    var settlement = +$('settlement').value || 0;
+    var savings = +$('savings').value || 0;
+    var debt = +$('debt').value || 0;
+    var minPay = +$('months').value || 0;
+
+    var outflow = expenses + housing + support + minPay;
+    var surplus = income - outflow;
+    var cash = settlement + savings;
+    var runway = outflow > 0 ? cash / outflow : 999;
+    var dti = income > 0 ? (minPay / income) * 100 : 0;
+    var debtRatio = income > 0 ? (debt / (income * 12)) * 100 : 0;
+
+    // score: surplus 40, runway 35, debt load 25
+    var sSurplus = surplus >= 1000 ? 40 : surplus >= 500 ? 32 : surplus >= 0 ? 24 : surplus >= -500 ? 14 : surplus >= -1500 ? 6 : 0;
+    var sRunway = runway >= 6 ? 35 : runway >= 3 ? 28 : runway >= 1 ? 18 : runway >= 0.5 ? 10 : 0;
+    var sDebt = dti <= 10 ? 25 : dti <= 20 ? 20 : dti <= 30 ? 14 : dti <= 45 ? 8 : 3;
+    // income-less with real obligations = critical, no passing grade
+    if (income <= 0 && outflow > 0) { sSurplus = 0; sRunway = 0; }
+    var score = Math.max(0, Math.min(100, Math.round(sSurplus + sRunway + sDebt)));
+
+    // ---- render ----
+    var gaugeArc = $('gauge-arc');
+    var circ = 452.4;
+    gaugeArc.style.strokeDashoffset = circ * (1 - score/100);
+    gaugeArc.style.stroke = score >= 70 ? '#2E7D5B' : score >= 40 ? '#C9862A' : '#B3472E';
+    $('score-num').textContent = score;
+
+    var grade = score >= 80 ? 'A' : score >= 65 ? 'B' : score >= 50 ? 'C' : score >= 35 ? 'D' : 'F';
+    var titles = {
+      A: 'Solid footing. Now build. Your finances are structurally sound. The rebuild is already underway — this phase is about compounding, not survival.',
+      B: 'Workable, with room to tighten. You can cover your obligations and you have a cushion. The next 90 days are about converting that cushion into a real foundation.',
+      C: 'Treading water. Time to get deliberate. You\'re covering the basics but there\'s no margin. Every surprise is a crisis right now — the plan below builds you a buffer.',
+      D: 'Fragile. This is your 90-day priority. You are living close to or past your break-even line. The goal of the next 90 days is simple: stop the bleed, then build one month of runway.',
+      F: 'Critical. Stabilize before anything else. Right now your outflows exceed (or nearly exceed) your income. This is not a shame situation — it\'s a math situation. Phase 1 below is non-negotiable.'
+    };
+    $('verdict-title').textContent = 'Grade ' + grade + ' — ' + titles[grade].split('.')[0] + '.';
+    $('verdict-text').textContent = titles[grade].split('. ').slice(1).join('. ');
+
+    $('break-even').textContent = fmt(expenses + housing + support + minPay);
+    var kSurplus = $('kpi-surplus');
+    kSurplus.textContent = fmtSigned(surplus);
+    kSurplus.className = 'v ' + (surplus >= 500 ? 'good' : surplus >= 0 ? 'warn' : 'bad');
+    var kRunway = $('kpi-runway');
+    kRunway.textContent = runway >= 999 ? '∞' : (runway < 0.1 ? '<1 mo' : Math.round(runway * 10) / 10 + ' mo');
+    kRunway.className = 'v ' + (runway >= 3 ? 'good' : runway >= 1 ? 'warn' : 'bad');
+    var kDebt = $('kpi-debt');
+    kDebt.textContent = Math.round(dti) + '%';
+    kDebt.className = 'v ' + (dti <= 15 ? 'good' : dti <= 30 ? 'warn' : 'bad');
+
+    // flags
+    var flags = [];
+    if (surplus >= 500) flags.push(['ok','<strong>Positive cash flow.</strong> You\'re keeping ' + fmt(surplus) + '/month after everything. Bank this before you spend it.']);
+    else if (surplus >= 0) flags.push(['warn','<strong>Thin margin.</strong> You\'re at ' + fmtSigned(surplus) + '/month. One emergency away from the red — the plan below builds your buffer first.']);
+    else flags.push(['bad','<strong>Cash-flow hole.</strong> You\'re short ' + fmt(Math.abs(surplus)) + '/month. Phase 1 of your plan is about closing exactly this.']);
+    if (runway >= 6) flags.push(['ok','<strong>Runway: ' + Math.round(runway) + ' months.</strong> If your income stopped today, you could hold for half a year. That\'s real breathing room.']);
+    else if (runway >= 3) flags.push(['warn','<strong>Runway: ' + Math.round(runway) + ' months.</strong> Decent, but below the 6-month target. Your settlement cash should be treated as a foundation, not a vacation.']);
+    else if (runway >= 1) flags.push(['warn','<strong>Runway: ' + Math.round(runway * 10) / 10 + ' months.</strong> You have a cushion, but it\'s thin. Protect it — no major purchases, no loans to friends, no "treat yourself" weeks.']);
+    else flags.push(['bad','<strong>Runway under 1 month.</strong> Your liquid cash covers less than a month of expenses. This is the #1 priority — see Phase 1.']);
+    if (dti <= 15) flags.push(['ok','<strong>Debt load manageable.</strong> Minimum payments eat only ' + Math.round(dti) + '% of income. You can start attacking principal.']);
+    else if (dti <= 30) flags.push(['warn','<strong>Debt pressure.</strong> Minimums take ' + Math.round(dti) + '% of income. Attack the highest-interest card first — see Phase 2.']);
+    else flags.push(['bad','<strong>Debt overload.</strong> Minimums take ' + Math.round(dti) + '% of income — that\'s a serious drag. Consider a consolidation talk with a nonprofit credit counselor.']);
+    if (settlement > 0 && savings < settlement * 0.5) flags.push(['warn','<strong>Liquidity check.</strong> Most of your cash is settlement money. Park it in a high-yield savings account for now — don\'t let it leak into lifestyle.']);
+    $('flags').innerHTML = flags.map(function(f){ return '<li class="' + f[0] + '">' + f[1] + '</li>'; }).join('');
+
+    // ---- 90-day plan ----
+    var plan = [];
+    var phase1 = ['<span class="tag">Phase 1 · Days 1–14</span>','<h4>Stop the Bleed</h4>','<span class="days">Triage. Nothing fancy.</span>'];
+    var p1 = [];
+    if (surplus < 0) p1.push('Cut every non-essential this week: subscriptions, eating out, anything with a monthly fee. Your goal: close the ' + fmt(Math.abs(surplus)) + '/month hole.');
+    else p1.push('Freeze your spending for 14 days. No large purchases, no credit card swipes above ' + fmt(Math.max(50, Math.round(surplus*0.2))) + ' without a 48-hour pause.');
+    p1.push('Move your settlement + savings into a separate high-yield account. Label it "Foundation." It is not spending money.');
+    p1.push('List every debt with balance, rate, and minimum. Rank by interest rate. This list is your Phase 2 weapon.');
+    if (support > 0) p1.push('Verify your support payments are wired, scheduled, and documented. Missing one creates legal + financial ripple effects.');
+    phase1.push('<ul>' + p1.map(function(x){return '<li>'+x+'</li>';}).join('') + '</ul>');
+
+    var phase2 = ['<span class="tag">Phase 2 · Days 15–45</span>','<h4>Build the Buffer</h4>','<span class="days">One month of runway, then attack debt.</span>'];
+    var p2 = [];
+    if (runway < 1) p2.push('Your #1 job: get to one full month of expenses (' + fmt(outflow) + ') in liquid cash. If that means a side gig or selling things — that\'s the mission.');
+    else p2.push('You have runway. Now push it to 3 months: set a fixed auto-transfer of ' + fmt(Math.max(50, Math.round(surplus*0.4))) + '/month into the Foundation account.');
+    p2.push('Attack the highest-interest debt with every dollar above your minimums. Snowball wins psychologically; avalanche wins mathematically — pick one and don\'t switch.');
+    p2.push('Rebuild your credit file: pull all three reports, dispute errors, and make every payment on time. Your credit is a tool you will need for housing and car.');
+    p2.push('Build your post-divorce budget in writing — one page, every category. Adjust it weekly for the first month.');
+    phase2.push('<ul>' + p2.map(function(x){return '<li>'+x+'</li>';}).join('') + '</ul>');
+
+    var phase3 = ['<span class="tag">Phase 3 · Days 46–90</span>','<h4>Make the Foundation Work</h4>','<span class="days">Systematize, then grow.</span>'];
+    var p3 = [];
+    if (dti > 30) p3.push('By now your debt minimums should be falling. Re-route every freed dollar into the next debt on the list.');
+    else p3.push('Debt is under control. Start a modest emergency fund target: 6 months of ' + fmt(outflow) + ' = ' + fmt(outflow*6) + '. Build it in chunks.');
+    p3.push('Automate everything: bills, savings, debt payments. If it\'s not automated, it will slip — divorce brain is real.');
+    p3.push('Book a one-time session with a fee-only financial planner. One hour, your numbers, a second set of eyes. Worth every dollar.');
+    p3.push('Plan your next 12 months: income growth (raise, side income, career move), housing stability, and one personal goal that isn\'t about money.');
+    phase3.push('<ul>' + p3.map(function(x){return '<li>'+x+'</li>';}).join('') + '</ul>');
+
+    $('plan').innerHTML = [phase1, phase2, phase3].map(function(p){ return '<div class="phase">' + p.join('') + '</div>'; }).join('');
+
+    // show + confetti on A/B
+    $('result').classList.add('show');
+    if (score >= 65) confetti();
+    $('result').scrollIntoView({behavior:'smooth', block:'start'});
+  }
+
+  function confetti(){
+    var colors = ['#C9862A','#E0A04A','#2D6A9F','#4A90C4','#2E7D5B'];
+    for(var i=0;i<50;i++){
+      var el = document.createElement('div');
+      el.className = 'confetti';
+      el.style.left = Math.random()*100 + 'vw';
+      el.style.background = colors[Math.floor(Math.random()*colors.length)];
+      el.style.borderRadius = Math.random() > 0.5 ? '50%' : '2px';
+      el.style.animationDelay = (Math.random()*0.8) + 's';
+      document.body.appendChild(el);
+      setTimeout(function(){ el.remove(); }, 3500);
+    }
+  }
+
+  $('calc-form').addEventListener('submit', function(e){ e.preventDefault(); calculate(); });
+  $('demo').addEventListener('click', fillDemo);
+
+  // auto-calc if params present
+  try{
+    var q = new URLSearchParams(window.location.search);
+    if(q.get('calc') === '1' || q.get('demo') === '1' || q.toString().length > 2){ setTimeout(calculate, 100); }
+  }catch(e){}
+})();
+</script>
+</body>
+</html>
